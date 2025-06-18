@@ -11,7 +11,9 @@
 自然数 \( n \) について、\( n \) の正の約数の総和を表す関数を約数関数といい、\( \sigma(n) \) と表す。
 
 \( \sigma(n)\) は以下の性質をもつ。
+
 \vskip.5\baselineskip
+
 (1) \( n = 1 \) のときに限り、\( \sigma(n) = 1 \).
 
 (2) \( n \) が完全数のときに限り、\( \sigma(n) = 2n \).
@@ -33,7 +35,7 @@
 
 
 \begin{theorem}[Euclid-Euler]~\
-\lean{Theorems100.Nat.eq_two_pow_mul_prime_mersenne_of_even_perfect}
+%\lean{even_and_perfect_iff}
 
 \( n \) を自然数とする。
 メルセンヌ数 \( 2^n - 1 \) が素数であるとき、\( 2^{n-1}(2^n - 1) \) は完全数である。
@@ -78,7 +80,7 @@
           &= (2^n - 1) \cdot \sigma(k)
 \end{align*}
 
-\( \sigma(N) = 2^{n}k \) より、\( \sigma(k) = \frac{2^{n}k}{2^n - 1} = k + \frac{k}{2^n-1} \) が成り立つ。(\(\because \)  \(2^n - 1 \neq 0 \))
+\( \sigma(N) = 2^{n}k \) より、\( \sigma(k) = \frac{2^{n}k}{2^n - 1} = \frac{(2^{n}-1)k + k}{2^n - 1} = k + \frac{k}{2^n-1} \) が成り立つ。(\(\because \)  \(2^n - 1 \neq 0 \))
 
 ここで、\(\sigma(k)\) と \(k\) は自然数より、\(\frac{k}{2^n-1}\) も自然数。
 
