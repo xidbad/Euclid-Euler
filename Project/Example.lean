@@ -18,14 +18,17 @@ open Nat
 
 open ArithmeticFunction Finset
 
-namespace Theorems100
-
-namespace Nat
-
---namespace ArithmeticFunction
-
 /-- `σ k n` is the sum of the `k`th powers of the divisors of `n` -/
 def morishitasigma (k : ℕ) : ArithmeticFunction ℕ :=
   ⟨fun n => ∑ d ∈ divisors n, d ^ k, by simp⟩
 
 #check morishitasigma
+
+theorem sigma_apply1 {k n : ℕ} : σ k n = ∑ d ∈ divisors n, d ^ k :=
+  rfl
+
+theorem sigma_one_apply (n : ℕ) : σ 1 n = ∑ d ∈ divisors n, d := by simp [sigma_apply1]
+
+theorem isMultiplicative_sigma {k : ℕ} : IsMultiplicative (σ k) := by
+  rw [← zeta_mul_pow_eq_sigma]
+  apply isMultiplicative_zeta.mul isMultiplicative_pow
