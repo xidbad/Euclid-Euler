@@ -12,22 +12,15 @@ import Mathlib.Data.Nat.GCD.BigOperators
 import Mathlib.Data.Nat.Factorization.Induction
 import Mathlib.Tactic.ArithMult
 
-open Finset
-
 open Nat
 
 open ArithmeticFunction Finset
 
 /-- `σ k n` is the sum of the `k`th powers of the divisors of `n` -/
-def morishitasigma (k : ℕ) : ArithmeticFunction ℕ :=
+def sigma_div (k : ℕ) : ArithmeticFunction ℕ :=
   ⟨fun n => ∑ d ∈ divisors n, d ^ k, by simp⟩
 
-#check morishitasigma
-
-theorem sigma_apply1 {k n : ℕ} : σ k n = ∑ d ∈ divisors n, d ^ k :=
-  rfl
-
-theorem sigma_one_apply (n : ℕ) : σ 1 n = ∑ d ∈ divisors n, d := by simp [sigma_apply1]
+#check sigma_div
 
 theorem isMultiplicative_sigma {k : ℕ} : IsMultiplicative (σ k) := by
   rw [← zeta_mul_pow_eq_sigma]
