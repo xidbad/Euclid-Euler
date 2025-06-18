@@ -22,8 +22,10 @@ namespace Theorems100
 
 namespace Nat
 
-namespace ArithmeticFunction
+--namespace ArithmeticFunction
 
 /-- `σ k n` is the sum of the `k`th powers of the divisors of `n` -/
-def sigma (k : ℕ) : ArithmeticFunction ℕ :=
+def morishitasigma (k : ℕ) : ArithmeticFunction ℕ :=
   ⟨fun n => ∑ d ∈ divisors n, d ^ k, by simp⟩
+
+#check morishitasigma
