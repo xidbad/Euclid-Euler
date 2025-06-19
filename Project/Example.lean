@@ -1,17 +1,16 @@
-import Mathlib
--- import Mathlib.NumberTheory.ArithmeticFunction
--- import Mathlib.NumberTheory.LucasLehmer
--- import Mathlib.Algebra.GeomSum
--- import Mathlib.RingTheory.Multiplicity
--- import Mathlib.Tactic.NormNum.Prime
+import Mathlib.NumberTheory.ArithmeticFunction
+import Mathlib.NumberTheory.LucasLehmer
+import Mathlib.Algebra.GeomSum
+import Mathlib.RingTheory.Multiplicity
+import Mathlib.Tactic.NormNum.Prime
 
--- import Mathlib.Algebra.BigOperators.Ring.Finset
--- import Mathlib.Algebra.Module.BigOperators
--- import Mathlib.NumberTheory.Divisors
--- import Mathlib.Data.Nat.Squarefree
--- import Mathlib.Data.Nat.GCD.BigOperators
--- import Mathlib.Data.Nat.Factorization.Induction
--- import Mathlib.Tactic.ArithMult
+import Mathlib.Algebra.BigOperators.Ring.Finset
+import Mathlib.Algebra.Module.BigOperators
+import Mathlib.NumberTheory.Divisors
+import Mathlib.Data.Nat.Squarefree
+import Mathlib.Data.Nat.GCD.BigOperators
+import Mathlib.Data.Nat.Factorization.Induction
+import Mathlib.Tactic.ArithMult
 
 open Nat
 
