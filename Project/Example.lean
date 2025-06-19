@@ -14,4 +14,4 @@ theorem isMultiplicative_sigma {k : ℕ} : IsMultiplicative (σ k) := by
   rw [← zeta_mul_pow_eq_sigma]
   apply isMultiplicative_zeta.mul isMultiplicative_pow
 
---#min_imports
+#min_imports
