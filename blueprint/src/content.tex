@@ -5,3 +5,99 @@
 % If you want to split the blueprint content into several files then
 % the current file can be a simple sequence of \input. Otherwise It
 % can start with a \section or \chapter for instance.
+
+\begin{definition}[約数関数]\label{Arithmetic_Function}
+\lean{sigma_div}\leanok
+
+自然数 \( n \) について、\( n \) の正の約数の総和を表す関数を約数関数といい、\( \sigma(n) \) と表す。
+
+\( \sigma(n)\) は以下の性質をもつ。
+
+\vskip.5\baselineskip
+
+(1) \( n = 1 \) のときに限り、\( \sigma(n) = 1 \).
+
+(2) \( n \) が完全数のときに限り、\( \sigma(n) = 2n \).
+
+(3) \( n \) が素数のときに限り、\( \sigma(n) =  1 + n \).
+
+(4) 乗法的関数である。すなわち、互いに素な自然数 \( m, n \) に対して、\( \sigma(mn) = \sigma(m) \cdot \sigma(n) \).
+
+\end{definition}
+
+
+\begin{definition}[完全数]~\
+
+自然数 \( N \) が完全数であるとは、\( N \) の正の約数の総和が \( 2N \) に等しいことをいう。
+
+すなわち、\( \sigma(N)\) = \( 2N \).
+
+\end{definition}
+
+
+\begin{theorem}[Euclid-Euler]~\
+%\lean{even_and_perfect_iff}
+
+\( n \) を自然数とする。
+メルセンヌ数 \( 2^n - 1 \) が素数であるとき、\( 2^{n-1}(2^n - 1) \) は完全数である。
+
+逆に、任意の偶数の完全数は \( 2^{n-1}(2^n - 1) \) の形で表され、このとき \( 2^n - 1 \) は(メルセンヌ)素数である。
+
+\end{theorem}
+
+
+\begin{proof}
+
+[十分性(Euclid)]
+
+\( N = 2^{n-1}(2^n - 1) \) とする。(\(n \) は自然数). ただし、メルセンヌ数 \( 2^n - 1 \) は素数。
+
+\( 2^{n-1} \) と \( 2^n - 1 \) は互いに素より、\( \sigma(N) = \sigma(2^{n-1}) \cdot \sigma(2^n - 1) \) が成り立つ。
+
+このとき、
+\begin{align*}
+\sigma(N) &= \sigma(2^{n-1}) \cdot \sigma(2^n - 1) \\
+          &= (1 + 2 + 2^2 + \ldots + 2^{n-1}) \cdot \{1 + (2^n - 1)\} \\
+          &= (\frac{2^n-1}{2-1}) \cdot (2^n) \\
+          &= 2^n(2^n - 1)
+\end{align*}
+
+したがって、\(\sigma(N) = 2 \cdot 2^{n-1}(2^n - 1) = 2N\) が成り立つため、\( N \) は完全数である。
+
+\end{proof}
+
+
+\begin{proof}
+
+[必要性(Euler)]
+
+任意の偶数の完全数 \( N \) は自然数 \( n \) と奇数 \( k \) を用いて、\( N = 2^{n-1}k \) と表せる。
+
+\( N \) は完全数より、\(\sigma(N) = 2N = 2^{n}k\) が成り立つ。
+
+また、\(2^{n-1}\) と \( k \) は互いに素より、\(N\) の約数の和は次のように分解できる：
+\begin{align*}
+\sigma(N) &= \sigma(2^{n-1}) \cdot \sigma(k) \\
+          &= (2^n - 1) \cdot \sigma(k)
+\end{align*}
+
+\( \sigma(N) = 2^{n}k \) より、\( \sigma(k) = \frac{2^{n}k}{2^n - 1} = \frac{(2^{n}-1)k + k}{2^n - 1} = k + \frac{k}{2^n-1} \) が成り立つ。(\(\because \)  \(2^n - 1 \neq 0 \))
+
+ここで、\(\sigma(k)\) と \(k\) は自然数より、\(\frac{k}{2^n-1}\) も自然数。
+
+したがって、\(2^n - 1\) は \(k\) の約数である。
+
+\(k = (2^n-1) \cdot m\) とおく。このとき、\( \sigma(k) = k + m \)。(\(m \) は自然数)
+
+ここで、\( m \neq 1 \) とすると、\(k\) は少なくとも \(1, m, k \) を約数に持つため、
+\(\sigma(k) \geq 1 + m + k\) が成り立つ。
+
+しかし、これは \( \sigma(k) \geq 1 + k + m > k + m \) となり、矛盾。
+
+よって、\( m = 1 \) であり、\( k = 2^n - 1 \) が成り立つ。
+
+したがって、任意の偶数の完全数は \( N = 2^{n-1}(2^n - 1) \) の形で表される。
+
+またこのとき、\(\sigma(k) = 1 + k \) となり、\( k = 2^n - 1 \) は素数である。
+
+\end{proof}
