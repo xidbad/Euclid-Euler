@@ -43,6 +43,7 @@
 
 \end{definition}
 
+
 \begin{definition}[完全数]\label{perfect}\lean{Perfect}\leanok~\
 
 自然数 $n$ が完全数であるとは、$n$ の真の約数（$n$ 自身を除く正の約数）の和が $n$ に等しいとき、すなわち
@@ -61,15 +62,53 @@
 
 \end{lemma}
 
-\begin{theorem}[Euclid I]
 
-\(M_{k+1}\) が素数ならば、\(2^k*M_{k+1}\) は完全数である
+\begin{theorem}[Euclid I]\label{perfect_two_pow_mul_mersenne_of_prime}
+  \lean{perfect_two_pow_mul_mersenne_of_prime}\leanok~\
+
+\(M_{k+1} = 2^{k+1} - 1\) が素数ならば、\(2^k \cdot M_{k+1}\) は完全数。
+
+\end{theorem}
+
+
+\begin{lemma}\label{ne_zero_of_prime_mersenne}\lean{ne_zero_of_prime_mersenne}\leanok~\
+
+\(M_{k+1} = 2^{k+1} - 1\) が素数ならば、 \(k \neq 0\).
+
+\end{lemma}
+
+
+\begin{theorem}[Euclid I\hspace{-1.2pt}I]\label{even_two_pow_mul_mersenne_of_prime}
+\lean{even_two_pow_mul_mersenne_of_prime}\leanok~\
+
+\(M_{k+1} = 2^{k+1} - 1\) が素数ならば、\(2^k \cdot M_{k+1}\) は偶数。
+
+\end{theorem}
+
+
+\begin{lemma}\label{eq_two_pow_mul_odd}\lean{eq_two_pow_mul_odd}\leanok~\
+
+任意の自然数 \(n > 0\) は、\(n = 2^k \cdot m\)（\(m\) は奇数）と一意に表せる。
+
+\end{lemma}
+
+
+\begin{theorem}[Euler]\label{eq_two_pow_mul_prime_mersenne_of_even_perfect}
+\lean{eq_two_pow_mul_prime_mersenne_of_even_perfect}\leanok~\
+
+\(n\) が偶数かつ完全数であるならば、ある自然数 \(k\) が存在して、
+\[
+n = 2^k (2^{k+1} - 1)
+\quad \text{かつ} \quad
+2^{k+1} - 1 \text{ は素数}
+\]
+が成り立つ。
 
 \end{theorem}
 
 
 \begin{theorem}[Euclid-Euler]\label{even_and_perfect_iff}
-\lean{even_and_perfect_iff}\leanok
+\lean{even_and_perfect_iff}\leanok~\
 
 \( n \) を自然数とする。
 メルセンヌ数 \( 2^n - 1 \) が素数であるとき、\( 2^{n-1}(2^n - 1) \) は完全数である。
