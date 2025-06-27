@@ -102,6 +102,8 @@ theorem eq_two_pow_mul_odd {n : ℕ} (hpos : 0 < n) : ∃ k m : ℕ, n = 2 ^ k *
   -- _ = n
   rw [← hm]
 
+-- オイラーの必要条件
+-- n が偶数かつ完全数ならば、mersenne (k + 1) は素数 かつ n = 2 ^ k * mersenne (k + 1) と表せる
 theorem eq_two_pow_mul_prime_mersenne_of_even_perfect {n : ℕ} (ev : Even n) (perf : Nat.Perfect n) :
     ∃ k : ℕ, Nat.Prime (mersenne (k + 1)) ∧ n = 2 ^ k * mersenne (k + 1) := by
   -- hpos : 0 < n (∵ n.perfect)
@@ -193,6 +195,8 @@ theorem eq_two_pow_mul_prime_mersenne_of_even_perfect {n : ℕ} (ev : Even n) (p
   -- 2 ∣ 0 (rw [hm, mul_zero]; exact dvd_zero 2)
       simp [hm]
 
+-- Euclid-Euler theorem
+-- n が偶数かつ完全数 ↔ mersenne (k + 1) が素数かつ n = 2 ^ k * mersenne (k + 1)
 theorem even_and_perfect_iff {n : ℕ} :
     Even n ∧ Nat.Perfect n ↔ ∃ k : ℕ, Nat.Prime (mersenne (k + 1)) ∧ n = 2 ^ k * mersenne (k + 1) := by
   -- → ∧ ←
