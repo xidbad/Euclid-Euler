@@ -6,34 +6,66 @@
 % the current file can be a simple sequence of \input. Otherwise It
 % can start with a \section or \chapter for instance.
 
-\begin{definition}[約数関数]\label{Arithmetic_Function}
-\lean{sigma_div}\leanok
+\begin{definition}[約数関数]\label{Arithmetic_Function}\lean{sigma_div}\leanok~\
 
-自然数 \( n \) について、\( n \) の正の約数の総和を表す関数を約数関数といい、\( \sigma(n) \) と表す。
+自然数 \(n\) について、\(n\) のすべての約数 \(d\) に対して \(d^k\) (\(k\) は自然数) を足し合わせた関数
+\[
+\sigma_k(n) := \sum_{d \mid n} d^k
+\]
+\;\;\;を$k$次の約数関数という。特に、\(\sigma_1(n)\) は $n$ の約数の和を表す。
 
-\( \sigma(n)\) は以下の性質をもつ。
+\end{definition}
+% 自然数 \( n \) について、\( n \) の正の約数の総和を表す関数を約数関数といい、\( \sigma(n) \) と表す。
+
+以下、 \(k = 1\) とし、 \(\sigma_1(n) = \sigma(n)\) と表す。
+
+
+\begin{lemma}\label{isMultiplicative}\lean{isMultiplicative_sigma}\leanok
+
+\(\sigma(n)\) は以下の性質をもつ。
 
 \vskip.5\baselineskip
 
-(1) \( n = 1 \) のときに限り、\( \sigma(n) = 1 \).
+(1) \(n = 1\) のときに限り、\(\sigma(n) = 1\).
 
-(2) \( n \) が完全数のときに限り、\( \sigma(n) = 2n \).
+(2) \(n\) が完全数のときに限り、\(\sigma(n) = 2n\).
 
-(3) \( n \) が素数のときに限り、\( \sigma(n) =  1 + n \).
+(3) \(n\) が素数のときに限り、\(\sigma(n) =  1 + n\).
 
-(4) 乗法的関数である。すなわち、互いに素な自然数 \( m, n \) に対して、\( \sigma(mn) = \sigma(m) \cdot \sigma(n) \).
+(4) 乗法的関数である。すなわち、\((m, n) = 1\) ならば、\(\sigma(mn) = \sigma(m) \cdot \sigma(n)\).
+
+\end{lemma}
+
+
+\begin{definition}[メルセンヌ数]\label{mersenne}\lean{mersenne_}\leanok~\
+
+自然数 \(k\) に対して、\(M_k := 2^k - 1\) をメルセンヌ数と呼ぶ。\(M_k\) が素数であるとき、\emph{メルセンヌ素数}という。
+
+\end{definition}
+
+\begin{definition}[完全数]\label{perfect}\lean{Perfect}\leanok~\
+
+自然数 $n$ が完全数であるとは、$n$ の真の約数（$n$ 自身を除く正の約数）の和が $n$ に等しいとき、すなわち
+\[
+\sum_{\substack{d \mid n\\ d < n}} d = n
+\]
+\;\;\;が成り立つことをいう。つまり、\(\sigma(n)\) = \(2n\).
+% 自然数 \(n\) が完全数であるとは、\(n\) の正の約数の総和が \( 2N \) に等しいことをいう。
 
 \end{definition}
 
 
-\begin{definition}[完全数]\label{perfect}
-\lean{Perfect}\leanok
+\begin{lemma}\label{sigma_two_pow_eq_mersenne_succ}\lean{sigma_two_pow_eq_mersenne_succ}\leanok
 
-自然数 \( N \) が完全数であるとは、\( N \) の正の約数の総和が \( 2N \) に等しいことをいう。
+\(\sigma(2^k) = M_{k+1}\)
 
-すなわち、\( \sigma(N)\) = \( 2N \).
+\end{lemma}
 
-\end{definition}
+\begin{theorem}[Euclid I]
+
+\(M_{k+1}\) が素数ならば、\(2^k*M_{k+1}\) は完全数である
+
+\end{theorem}
 
 
 \begin{theorem}[Euclid-Euler]\label{even_and_perfect_iff}
@@ -103,8 +135,8 @@
 
 \end{proof}
 
-\begin{lemma}
+% \begin{lemma}
 
-\(\sum_{i = 1}^{\n} 2^i = mersenne(k+1)\)
+% \(\sum_{i = 1}^{\n} 2^i = mersenne(k+1)\)
 
-\end{lemma}
+% \end{lemma}

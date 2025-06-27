@@ -19,6 +19,10 @@ theorem isMultiplicative_sigma {k : ℕ} : IsMultiplicative (σ k) := by
 def Perfect (n : ℕ) : Prop :=
   ∑ i ∈ properDivisors n, i = n ∧ 0 < n
 
+-- メルセンヌ数の定義
+def mersenne_ (p : ℕ) : ℕ :=
+  2 ^ p - 1
+
 -- 1 から 2 ^ k までの和 = 2 ^ (k + 1) - 1 = mersenne (k + 1)
 -- σ k n = nの約数のk乗の和 → σ 1 (2 ^ k) = 2 ^ k の約数の1乗の和 = 1 + 2 + 2 ^ 2 + ⋯ + 2 ^ k
 theorem sigma_two_pow_eq_mersenne_succ (k : ℕ) : σ 1 (2 ^ k) = mersenne (k + 1) := by
