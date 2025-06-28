@@ -6,25 +6,37 @@
 % the current file can be a simple sequence of \input. Otherwise It
 % can start with a \section or \chapter for instance.
 
+\begin{definition}[完全数]\label{perfect}\lean{Perfect}\leanok~\
+
+自然数 \(n\) が完全数であるとは、\(n\) の真の約数（\(n\) 自身を除く正の約数）の和が \(n\) に等しいとき、すなわち
+\[
+\sum_{\substack{d \mid n\\ d < n}} d = n
+\]
+\;\;\;が成り立つことをいう.
+
+\end{definition}
+
+
 \begin{definition}[約数関数]\label{Arithmetic_Function}\lean{sigma_div}\leanok~\
 
 自然数 \(n\) について、\(n\) のすべての約数 \(d\) に対して \(d^k\) (\(k\) は自然数) を足し合わせた関数
 \[
 \sigma_k(n) := \sum_{d \mid n} d^k
 \]
-\;\;\;を$k$次の約数関数という。特に、\(\sigma_1(n)\) は $n$ の約数の和を表す。
+\;\;\;を$k$次の約数関数という.特に、\(\sigma_1(n)\) は $n$ の約数の和を表す.
+\vspace{0.5\baselineskip}
+
+以下、 \(k = 1\) とし、 \(\sigma_1(n) = \sigma(n)\) と表す.
+
 
 \end{definition}
-% 自然数 \( n \) について、\( n \) の正の約数の総和を表す関数を約数関数といい、\( \sigma(n) \) と表す。
-
-以下、 \(k = 1\) とし、 \(\sigma_1(n) = \sigma(n)\) と表す。
 
 
 \begin{lemma}\label{isMultiplicative}\lean{isMultiplicative_sigma}\leanok
 
-\(\sigma(n)\) は以下の性質をもつ。
+\(\sigma(n)\) は以下の性質をもつ.
 
-\vskip.5\baselineskip
+\vspace{0.5\baselineskip}
 
 (1) \(n = 1\) のときに限り、\(\sigma(n) = 1\).
 
@@ -32,26 +44,16 @@
 
 (3) \(n\) が素数のときに限り、\(\sigma(n) =  1 + n\).
 
-(4) 乗法的関数である。すなわち、\((m, n) = 1\) ならば、\(\sigma(mn) = \sigma(m) \cdot \sigma(n)\).
+(4) 乗法的関数である.すなわち、\((m, n) = 1\) ならば、\(\sigma(mn) = \sigma(m) \cdot \sigma(n)\).
+
+example : \(\sigma(12) =  \sigma(3\cdot4) = \sigma(3) \cdot \sigma(4) = 4 \cdot 7 = 28 = 1 + 2 + 3 + 4 + 6 + 12\).
 
 \end{lemma}
 
 
 \begin{definition}[メルセンヌ数]\label{mersenne}\lean{mersenne_}\leanok~\
 
-自然数 \(k\) に対して、\(M_k := 2^k - 1\) をメルセンヌ数と呼ぶ。\(M_k\) が素数であるとき、\emph{メルセンヌ素数}という。
-
-\end{definition}
-
-
-\begin{definition}[完全数]\label{perfect}\lean{Perfect}\leanok~\
-
-自然数 $n$ が完全数であるとは、$n$ の真の約数（$n$ 自身を除く正の約数）の和が $n$ に等しいとき、すなわち
-\[
-\sum_{\substack{d \mid n\\ d < n}} d = n
-\]
-\;\;\;が成り立つことをいう。つまり、\(\sigma(n)\) = \(2n\).
-% 自然数 \(n\) が完全数であるとは、\(n\) の正の約数の総和が \( 2N \) に等しいことをいう。
+自然数 \(k\) に対して、\(M_k := 2^k - 1\) をメルセンヌ数と呼ぶ.\(M_k\) が素数であるとき、\emph{メルセンヌ素数}という.
 
 \end{definition}
 
@@ -66,7 +68,7 @@
 \begin{theorem}[Euclid I]\label{perfect_two_pow_mul_mersenne_of_prime}
   \lean{perfect_two_pow_mul_mersenne_of_prime}\leanok~\
 
-\(M_{k+1} = 2^{k+1} - 1\) が素数ならば、\(2^k \cdot M_{k+1}\) は完全数。
+\(M_{k+1} = 2^{k+1} - 1\) が素数ならば、\(2^k \cdot M_{k+1}\) は完全数.
 
 \end{theorem}
 
@@ -81,14 +83,14 @@
 \begin{theorem}[Euclid I\hspace{-1.2pt}I]\label{even_two_pow_mul_mersenne_of_prime}
 \lean{even_two_pow_mul_mersenne_of_prime}\leanok~\
 
-\(M_{k+1} = 2^{k+1} - 1\) が素数ならば、\(2^k \cdot M_{k+1}\) は偶数。
+\(M_{k+1} = 2^{k+1} - 1\) が素数ならば、\(2^k \cdot M_{k+1}\) は偶数.
 
 \end{theorem}
 
 
 \begin{lemma}\label{eq_two_pow_mul_odd}\lean{eq_two_pow_mul_odd}\leanok~\
 
-任意の自然数 \(n > 0\) は、\(n = 2^k \cdot m\)（\(m\) は奇数）と一意に表せる。
+任意の自然数 \(n > 0\) は、\(n = 2^k \cdot m\)（\(m\) は奇数）と一意に表せる.
 
 \end{lemma}
 
@@ -102,7 +104,7 @@ n = 2^k (2^{k+1} - 1)
 \quad \text{かつ} \quad
 2^{k+1} - 1 \text{ は素数}
 \]
-が成り立つ。
+が成り立つ.
 
 \end{theorem}
 
@@ -110,72 +112,9 @@ n = 2^k (2^{k+1} - 1)
 \begin{theorem}[Euclid-Euler]\label{even_and_perfect_iff}
 \lean{even_and_perfect_iff}\leanok~\
 
-\( n \) を自然数とする。
-メルセンヌ数 \( 2^n - 1 \) が素数であるとき、\( 2^{n-1}(2^n - 1) \) は完全数である。
+\( n \) を自然数とする.
+メルセンヌ数 \( 2^n - 1 \) が素数であるとき、\( 2^{n-1}(2^n - 1) \) は完全数である.
 
-逆に、任意の偶数の完全数は \( 2^{n-1}(2^n - 1) \) の形で表され、このとき \( 2^n - 1 \) は(メルセンヌ)素数である。
+逆に、任意の偶数の完全数は \( 2^{n-1}(2^n - 1) \) の形で表され、このとき \( 2^n - 1 \) は(メルセンヌ)素数である.
 
 \end{theorem}
-
-
-\begin{proof}
-
-[十分性(Euclid)]
-
-\( N = 2^{n-1}(2^n - 1) \) とする。(\(n \) は自然数). ただし、メルセンヌ数 \( 2^n - 1 \) は素数。
-
-\( 2^{n-1} \) と \( 2^n - 1 \) は互いに素より、\( \sigma(N) = \sigma(2^{n-1}) \cdot \sigma(2^n - 1) \) が成り立つ。
-
-このとき、
-\begin{align*}
-\sigma(N) &= \sigma(2^{n-1}) \cdot \sigma(2^n - 1) \\
-          &= (1 + 2 + 2^2 + \ldots + 2^{n-1}) \cdot \{1 + (2^n - 1)\} \\
-          &= (\frac{2^n-1}{2-1}) \cdot (2^n) \\
-          &= 2^n(2^n - 1)
-\end{align*}
-
-したがって、\(\sigma(N) = 2 \cdot 2^{n-1}(2^n - 1) = 2N\) が成り立つため、\( N \) は完全数である。
-
-\end{proof}
-
-
-\begin{proof}
-
-[必要性(Euler)]
-
-任意の偶数の完全数 \( N \) は自然数 \( n \) と奇数 \( k \) を用いて、\( N = 2^{n-1}k \) と表せる。
-
-\( N \) は完全数より、\(\sigma(N) = 2N = 2^{n}k\) が成り立つ。
-
-また、\(2^{n-1}\) と \( k \) は互いに素より、\(N\) の約数の和は次のように分解できる：
-\begin{align*}
-\sigma(N) &= \sigma(2^{n-1}) \cdot \sigma(k) \\
-          &= (2^n - 1) \cdot \sigma(k)
-\end{align*}
-
-\( \sigma(N) = 2^{n}k \) より、\( \sigma(k) = \frac{2^{n}k}{2^n - 1} = \frac{(2^{n}-1)k + k}{2^n - 1} = k + \frac{k}{2^n-1} \) が成り立つ。(\(\because \)  \(2^n - 1 \neq 0 \))
-
-ここで、\(\sigma(k)\) と \(k\) は自然数より、\(\frac{k}{2^n-1}\) も自然数。
-
-したがって、\(2^n - 1\) は \(k\) の約数である。
-
-\(k = (2^n-1) \cdot m\) とおく。このとき、\( \sigma(k) = k + m \)。(\(m \) は自然数)
-
-ここで、\( m \neq 1 \) とすると、\(k\) は少なくとも \(1, m, k \) を約数に持つため、
-\(\sigma(k) \geq 1 + m + k\) が成り立つ。
-
-しかし、これは \( \sigma(k) \geq 1 + k + m > k + m \) となり、矛盾。
-
-よって、\( m = 1 \) であり、\( k = 2^n - 1 \) が成り立つ。
-
-したがって、任意の偶数の完全数は \( N = 2^{n-1}(2^n - 1) \) の形で表される。
-
-またこのとき、\(\sigma(k) = 1 + k \) となり、\( k = 2^n - 1 \) は素数である。
-
-\end{proof}
-
-% \begin{lemma}
-
-% \(\sum_{i = 1}^{\n} 2^i = mersenne(k+1)\)
-
-% \end{lemma}
