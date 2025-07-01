@@ -8,7 +8,7 @@
 
 \begin{definition}[完全数]\label{perfect}\lean{Perfect}\leanok~\
 
-自然数 \(n\) が完全数であるとは,\(n\) の真の約数（\(n\) 自身を除く正の約数）の和が \(n\) に等しいとき,すなわち
+自然数 \(n\) が完全数であるとは, \(n\) の真の約数（ \(n\) 自身を除く正の約数）の和が \(n\) に等しいとき,すなわち
 \[
 \sum_{\substack{d \mid n\\ d < n}} d = n
 \]
@@ -19,15 +19,14 @@
 
 \begin{definition}[約数関数]\label{Arithmetic_Function}\lean{sigma_div}\leanok~\
 
-自然数 \(n\) について,\(n\) のすべての約数 \(d\) に対して \(d^k\) (\(k\) は自然数) を足し合わせた関数
+自然数 \(n\) について, \(n\) のすべての約数 \(d\) に対して \(d^k\) ( \(k\) は自然数) を足し合わせた関数
 \[
 \sigma_k(n) := \sum_{d \mid n} d^k
 \]
-\;\;\;を$k$次の約数関数という.特に,\(\sigma_1(n)\) は $n$ の約数の和を表す.
+\;\;\;を \(k\) 次の約数関数という.特に, \(\sigma_1(n)\) は \(n\) の約数の総和を表す.
 \vspace{0.5\baselineskip}
 
-以下 \(k = 1\) のときのみ考え, \(\sigma_1(n) = \sigma(n)\) と表す.
-
+今回は \(k = 1\) のときのみ考え, \(\sigma_1(n) = \sigma(n)\) と表す.
 
 \end{definition}
 
@@ -38,22 +37,22 @@
 
 \vspace{0.5\baselineskip}
 
-(1) \(n = 1\) のときに限り,\(\sigma(n) = 1\).
+(1) \(n = 1\) のときに限り, \(\sigma(n) = 1\).
 
-(2) \(n\) が完全数のときに限り,\(\sigma(n) = 2n\).
+(2) \(n\) が完全数のときに限り, \(\sigma(n) = 2n\).
 
-(3) \(n\) が素数のときに限り,\(\sigma(n) =  1 + n\).
+(3) \(n\) が素数のときに限り, \(\sigma(n) =  1 + n\).
 
-(4) 乗法的関数である.すなわち,\((m, n) = 1\) ならば,\(\sigma(mn) = \sigma(m) \cdot \sigma(n)\).
+(4) 乗法的関数である.すなわち, \((m, n) = 1\) ならば, \(\sigma(mn) = \sigma(m) \cdot \sigma(n)\).
 
-example : \(\sigma(12) =  \sigma(3\cdot4) = \sigma(3) \cdot \sigma(4) = 4 \cdot 7 = 28 = 1 + 2 + 3 + 4 + 6 + 12\).
+\example : \(\sigma(12) =  \sigma(3\cdot4) = \sigma(3) \cdot \sigma(4) = 4 \cdot 7 = 28 = 1 + 2 + 3 + 4 + 6 + 12\).
 
 \end{lemma}
 
 
 \begin{definition}[メルセンヌ数]\label{mersenne}\lean{mersenne_}\leanok~\
 
-自然数 \(k\) に対して,\(M_k := 2^k - 1\) をメルセンヌ数と呼ぶ.\(M_k\) が素数であるとき,\emph{メルセンヌ素数}という.
+自然数 \(k\) に対して, \(M_k := 2^k - 1\) をメルセンヌ数と呼ぶ. \(M_k\) が素数であるとき,メルセンヌ素数という.
 
 \end{definition}
 
@@ -68,7 +67,7 @@ example : \(\sigma(12) =  \sigma(3\cdot4) = \sigma(3) \cdot \sigma(4) = 4 \cdot 
 \begin{theorem}[Euclid I]\label{perfect_two_pow_mul_mersenne_of_prime}
   \lean{perfect_two_pow_mul_mersenne_of_prime}\leanok~\
 
-\(M_{k+1} = 2^{k+1} - 1\) が素数ならば,\(2^k \cdot M_{k+1}\) は完全数.
+\(M_{k+1} = 2^{k+1} - 1\) が素数ならば, \(2^k \cdot M_{k+1}\) は完全数.
 
 \end{theorem}
 
@@ -83,14 +82,14 @@ example : \(\sigma(12) =  \sigma(3\cdot4) = \sigma(3) \cdot \sigma(4) = 4 \cdot 
 \begin{theorem}[Euclid I\hspace{-1.2pt}I]\label{even_two_pow_mul_mersenne_of_prime}
 \lean{even_two_pow_mul_mersenne_of_prime}\leanok~\
 
-\(M_{k+1} = 2^{k+1} - 1\) が素数ならば,\(2^k \cdot M_{k+1}\) は偶数.
+\(M_{k+1} = 2^{k+1} - 1\) が素数ならば, \(2^k \cdot M_{k+1}\) は偶数.
 
 \end{theorem}
 
 
 \begin{lemma}\label{eq_two_pow_mul_odd}\lean{eq_two_pow_mul_odd}\leanok~\
 
-任意の自然数 \(n > 0\) は,自然数 \(k\) と奇数 \(m\) を用いて,\(n = 2^k \cdot m\) と一意に表せる.
+任意の自然数 \(n > 0\) は,自然数 \(k\) と奇数 \(m\) を用いて, \(n = 2^k \cdot m\) と一意に表せる.
 
 \end{lemma}
 
@@ -113,7 +112,7 @@ n = 2^k (2^{k+1} - 1)
 \lean{even_and_perfect_iff}\leanok~\
 
 \( n \) を自然数とする.
-メルセンヌ数 \( 2^n - 1 \) が素数であるとき,\( 2^{n-1}(2^n - 1) \) は完全数である.
+メルセンヌ数 \( 2^n - 1 \) が素数であるとき, \( 2^{n-1}(2^n - 1) \) は完全数である.
 
 逆に,任意の偶数の完全数は \( 2^{n-1}(2^n - 1) \) の形で表され,このとき \( 2^n - 1 \) は(メルセンヌ)素数である.
 

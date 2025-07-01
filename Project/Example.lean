@@ -1,23 +1,57 @@
 import Mathlib.NumberTheory.ArithmeticFunction
 import Mathlib.NumberTheory.LucasLehmer
 import Mathlib.Tactic.NormNum.Prime
+import Mathlib.Algebra.Prime.Defs
 
 open Nat
 
 open ArithmeticFunction Finset
 
+-- 完全数の定義
+def Perfect_ (n : ℕ) : Prop :=
+  ∑ i ∈ properDivisors n, i = n ∧ 0 < n
+
+-- n : 完全数 ↔ 真の約数の和 = n
+theorem perfect_iff_sum_properDivisors (n : ℕ) (h : 0 < n) : Perfect n ↔ ∑ i ∈ properDivisors n, i = n :=
+  and_iff_left h
+
 -- 約数関数の定義
 def sigma_div (k : ℕ) : ArithmeticFunction ℕ :=
   ⟨fun n => ∑ d ∈ divisors n, d ^ k, by simp⟩
+
+-- def Prime_ (p : M) : Prop :=
+--   p ≠ 0 ∧ ¬IsUnit p ∧ ∀ a b, p ∣ a * b → p ∣ a ∨ p ∣ b
+
+-- -- 素数 ↔ σ(n) = 1 + n
+-- theorem sum_properDivisors_eq_one_iff_prime : ∑ x ∈ properDivisors n, x = 1 ↔ n.Prime := by
+--   rcases n with - | n
+--   · simp [Nat.not_prime_zero]
+--   · cases n
+--     · simp [Nat.not_prime_one]
+--     · rw [← properDivisors_eq_singleton_one_iff_prime]
+--       refine ⟨fun h => ?_, fun h => h.symm ▸ sum_singleton _ _⟩
+--       rw [@eq_comm (Finset ℕ) _ _]
+--       apply
+--         eq_properDivisors_of_subset_of_sum_eq_sum
+--           (singleton_subset_iff.2
+--             (one_mem_properDivisors_iff_one_lt.2 (succ_lt_succ (Nat.succ_pos _))))
+--           ((sum_singleton _ _).trans h.symm)
+
+-- 完全数 ↔ σ(n) = 2n
+theorem perfect_iff_sum_divisors_eq_two_mul (n : ℕ) (h : 0 < n) :
+    Perfect n ↔ ∑ i ∈ divisors n, i = 2 * n := by
+  rw [perfect_iff_sum_properDivisors h, sum_divisors_eq_sum_properDivisors_add_self, two_mul]
+  constructor <;> intro h
+  · rw [h]
+  · apply add_right_cancel h
 
 -- 乗法的関数であること
 theorem isMultiplicative_sigma {k : ℕ} : IsMultiplicative (σ k) := by
   rw [← zeta_mul_pow_eq_sigma]
   apply isMultiplicative_zeta.mul isMultiplicative_pow
 
--- 完全数の定義
-def Perfect (n : ℕ) : Prop :=
-  ∑ i ∈ properDivisors n, i = n ∧ 0 < n
+-- k = 1 のとき、σ は約数の総和
+theorem sigma_one_apply_ (n : ℕ) : σ 1 n = ∑ d ∈ divisors n, d := by simp [sigma_apply]
 
 -- メルセンヌ数の定義
 def mersenne_ (p : ℕ) : ℕ :=
