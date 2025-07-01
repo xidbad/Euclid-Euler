@@ -14,13 +14,22 @@ def Perfect_ (n : ℕ) : Prop :=
 def sigma_div (k : ℕ) : ArithmeticFunction ℕ :=
   ⟨fun n => ∑ d ∈ divisors n, d ^ k, by simp⟩
 
+-- σ k n = nの約数のk乗の和
+lemma sigma_apply_ {k n : ℕ} : σ k n = ∑ d ∈ divisors n, d ^ k :=
+  rfl
+
+-- k = 1 のとき、σ は約数の総和
+lemma sigma_one_apply_ (n : ℕ) : σ 1 n = ∑ d ∈ divisors n, d := by simp [sigma_apply]
+
 -- -- n = 1 ↔ ∑ d ∈ divisors n, d = 1
 -- lemma one_iff_sigma_one (n : ℕ) :
 --     n = 1 ↔ ∑ d ∈ divisors n, d = 1 := by
 --   constructor <;> intro h
 --   · rw [h]
 --     rfl
---   · rw [divisors_one]
+--   · rw [← sigma_one_apply] at h
+
+
 
 
 -- n : 完全数 ↔ σ(n) = 2n
@@ -58,13 +67,6 @@ lemma prime_iff_sum_divisors_eq_succ (n : ℕ) :
 lemma isMultiplicative_sigma {k : ℕ} : IsMultiplicative (σ k) := by
   rw [← zeta_mul_pow_eq_sigma]
   apply isMultiplicative_zeta.mul isMultiplicative_pow
-
--- σ k n = nの約数のk乗の和
-lemma sigma_apply_ {k n : ℕ} : σ k n = ∑ d ∈ divisors n, d ^ k :=
-  rfl
-
--- k = 1 のとき、σ は約数の総和
-lemma sigma_one_apply_ (n : ℕ) : σ 1 n = ∑ d ∈ divisors n, d := by simp [sigma_apply]
 
 -- メルセンヌ数の定義
 def mersenne_ (p : ℕ) : ℕ :=

@@ -6,9 +6,9 @@
 % the current file can be a simple sequence of \input. Otherwise It
 % can start with a \section or \chapter for instance.
 
-\begin{definition}[完全数]\label{perfect}\lean{Perfect}\leanok~\
+\begin{definition}[完全数]\label{perfect}\lean{Perfect_}\leanok~\
 
-自然数 \(n\) が完全数であるとは, \(n\) の真の約数（ \(n\) 自身を除く正の約数）の和が \(n\) に等しいとき,すなわち
+自然数 \(n\) が完全数であるとは, \(n\) の真の約数（\(n\) 自身を除く正の約数）の和が \(n\) に等しいとき,すなわち
 \[
 \sum_{\substack{d \mid n\\ d < n}} d = n
 \]
@@ -19,7 +19,7 @@
 
 \begin{definition}[約数関数]\label{Arithmetic_Function}\lean{sigma_div}\leanok~\
 
-自然数 \(n\) について, \(n\) のすべての約数 \(d\) に対して \(d^k\) ( \(k\) は自然数) を足し合わせた関数
+自然数 \(n\) について, \(n\) のすべての約数 \(d\) に対して \(d^k\) (\(k\) は自然数) を足し合わせた関数
 \[
 \sigma_k(n) := \sum_{d \mid n} d^k
 \]
