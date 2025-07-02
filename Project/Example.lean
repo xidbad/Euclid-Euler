@@ -21,7 +21,7 @@ lemma sigma_apply_ {k n : ℕ} : σ k n = ∑ d ∈ divisors n, d ^ k :=
 -- k = 1 のとき、σ は約数の総和
 lemma sigma_one_apply_ (n : ℕ) : σ 1 n = ∑ d ∈ divisors n, d := by simp [sigma_apply]
 
--- -- n = 1 ↔ ∑ d ∈ divisors n, d = 1
+-- n = 1 ↔ ∑ d ∈ divisors n, d = 1
 -- lemma one_iff_sigma_one (n : ℕ) :
 --     n = 1 ↔ ∑ d ∈ divisors n, d = 1 := by
 --   constructor <;> intro h
