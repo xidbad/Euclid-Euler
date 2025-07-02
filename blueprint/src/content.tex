@@ -24,14 +24,14 @@
 \sigma_k(n) := \sum_{d \mid n} d^k
 \]
 \;\;\;を \(k\) 次の約数関数という.特に, \(\sigma_1(n)\) は \(n\) の約数の総和を表す.
+
+\end{definition}
+
 \vspace{0.5\baselineskip}
 
 今回は \(k = 1\) のときのみ考え, \(\sigma_1(n) = \sigma(n)\) と表す.
 
-\end{definition}
-
-
-\begin{lemma} %\label{isMultiplicative}\lean{isMultiplicative_sigma}\leanok
+\begin{lemma}
 
 \(\sigma(n)\) は以下の性質をもつ.
 
@@ -41,15 +41,14 @@
 
 (2) \(n\) が完全数のときに限り, \(\sigma(n) = 2n\).
 % \label{perfect_iff_sum_divisors_eq_two_mul}
-\lean{perfect_iff_sum_divisors_eq_two_mul}\leanok
+% \lean{perfect_iff_sum_divisors_eq_two_mul}\leanok
 (3) \(n\) が素数のときに限り, \(\sigma(n) =  1 + n\).
 % \label{prime_iff_sum_divisors_eq_succ}
-\lean[prime_iff_sum_divisors_eq_succ]\leanok
+% \lean[prime_iff_sum_divisors_eq_succ]\leanok
 (4) 乗法的関数である.すなわち, \((m, n) = 1\) ならば, \(\sigma(mn) = \sigma(m) \cdot \sigma(n)\).
 % \label{isMultiplicative}
-\lean{isMultiplicative_sigma}\leanok
+% \lean{isMultiplicative_sigma}\leanok
 
-example : \(\sigma(12) =  \sigma(3\cdot4) = \sigma(3) \cdot \sigma(4) = 4 \cdot 7 = 28 = 1 + 2 + 3 + 4 + 6 + 12\).
 
 \end{lemma}
 
@@ -118,6 +117,6 @@ n = 2^k (2^{k+1} - 1)
 \( n \) を自然数とする.
 メルセンヌ数 \( 2^n - 1 \) が素数であるとき, \( 2^{n-1}(2^n - 1) \) は完全数である.
 
-逆に,任意の偶数の完全数は \( 2^{n-1}(2^n - 1) \) の形で表され,このとき \( 2^n - 1 \) は(メルセンヌ)素数である.
+逆に,任意の偶数の完全数は \( 2^{n-1}(2^n - 1) \) の形で表され,このとき \( 2^n - 1 \) は\(メルセンヌ\)素数である.
 
 \end{theorem}
