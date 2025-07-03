@@ -58,7 +58,7 @@ example : \(\sigma(12) =  \sigma(3\cdot4) = \sigma(3) \cdot \sigma(4) = 4 \cdot 
 \end{definition}
 
 
-\begin{lemma}\label{sigma_two_pow_eq_mersenne_succ}\lean{sigma_two_pow_eq_mersenne_succ}\leanok
+\begin{lemma}\label{sigma_two_pow_eq_mersenne_succ}\lean{sigma_two_pow_eq_mersenne_succ}\leanok \uses{mersenne}
 
 \(\sigma(2^k) = M_{k+1}\)
 
@@ -67,7 +67,7 @@ example : \(\sigma(12) =  \sigma(3\cdot4) = \sigma(3) \cdot \sigma(4) = 4 \cdot 
 
 \begin{theorem}[Euclid I]\label{perfect_two_pow_mul_mersenne_of_prime}
   \lean{perfect_two_pow_mul_mersenne_of_prime}\leanok~\
-
+  \uses{mersenne}
 \(M_{k+1} = 2^{k+1} - 1\) が素数ならば,\(2^k \cdot M_{k+1}\) は完全数.
 
 \end{theorem}
