@@ -26,23 +26,22 @@ lemma sigma_one_apply_ (n : ℕ) : σ 1 n = ∑ d ∈ divisors n, d := by simp [
 
 
 -- n = 1 ↔ ∑ d ∈ divisors n, d = 1
--- lemma one_iff_sigma_one (n : ℕ) :
---     n = 1 ↔ ∑ d ∈ divisors n, d = 1 := by
---   constructor <;> intro h
---   · rw [h]
---     rfl
---   · rw [← sigma_one_apply] at h
-
-
+lemma one_iff_sigma_one (n : ℕ) :
+    n = 1 ↔ ∑ d ∈ divisors n, d = 1 := by
+  constructor <;> intro h        -- → (h : n = 1) ∧ ← (h : ∑ d ∈ divisors n, d = 1)
+  · rw [h]                       -- → ∑ d ∈ divisors 1, d = 1
+    rfl
+  · rw [← sigma_one_apply] at h
+    sorry
 
 
 -- n : 完全数 ↔ σ(n) = 2n
 lemma perfect_iff_sum_divisors_eq_two_mul (n : ℕ) (h : 0 < n) :
     Perfect n ↔ ∑ i ∈ divisors n, i = 2 * n := by
-  rw [perfect_iff_sum_properDivisors h, sum_divisors_eq_sum_properDivisors_add_self, two_mul]
-  constructor <;> intro h
-  · rw [h]
-  · apply add_right_cancel h
+  rw [perfect_iff_sum_properDivisors h, sum_divisors_eq_sum_properDivisors_add_self, two_mul]  -- n : Perfect ↔ ∑ i ∈ n.properDivisors, i = n, ∑ i ∈ n.divisors, i = ∑ i ∈ n.properDivisors, i + n
+  constructor <;> intro h     -- → (h : ∑ i ∈ n.properDivisors, i = n) ∧ ← (h : ∑ i ∈ divisors n, i = n + n)
+  · rw [h]                    -- →
+  · apply add_right_cancel h  -- ←, a + b = c + b → a = c
 
 
 -- ∑ divisors n = (∑ properDivisors n) + n
@@ -63,18 +62,18 @@ lemma sigma_one_apply_prime_one {p : ℕ} (hp : p.Prime) :
 -- n : 素数 ↔ ∑ d ∈ divisors n, d = 1 + n
 lemma prime_iff_sum_divisors_eq_succ (n : ℕ) :
     n.Prime ↔ ∑ i ∈ divisors n, i = 1 + n := by
-  constructor <;> intro h'
-  · rw [sigma_one_apply_prime_one h']
-  · rw [sum_divisors_eq_sum_properDivisors_add_self n] at h'
-    apply add_right_cancel at h'
-    rw [sum_properDivisors_eq_one_iff_prime] at h'
+  constructor <;> intro h'                                    -- → (h' : n.Prime) ∧ ← (h' : ∑ i ∈ n.divisors, i = 1 + n)
+  · rw [sigma_one_apply_prime_one h']                         -- (p : Prime) → ∑ d ∈ p.divisors, d = 1 + p
+  · rw [sum_divisors_eq_sum_properDivisors_add_self n] at h'  -- ∑ i ∈ n.divisors, i = ∑ i ∈ n.properDivisors, i + n
+    apply add_right_cancel at h'                              -- a + b = c + b → a = c
+    rw [sum_properDivisors_eq_one_iff_prime] at h'            -- ∑ x ∈ n.properDivisors, x = 1 ↔ Nat.Prime n
     exact h'
 
 
 -- 乗法的関数であること
 lemma isMultiplicative_sigma {k : ℕ} : IsMultiplicative (σ k) := by
-  rw [← zeta_mul_pow_eq_sigma]
-  apply isMultiplicative_zeta.mul isMultiplicative_pow
+  rw [← zeta_mul_pow_eq_sigma]                          -- σ k = ζ * pow k
+  apply isMultiplicative_zeta.mul isMultiplicative_pow  -- ζ.IsMultiplicative, (pow k).IsMultiplicative → (ζ * pow k).IsMultiplicative
 
 
 -- メルセンヌ数の定義
@@ -110,7 +109,7 @@ theorem perfect_two_pow_mul_mersenne_of_prime (k : ℕ) (pr : (mersenne (k + 1))
   rw [mul_comm]
   -- (σ 1) (mersenne (k + 1) * 2 ^ k) = (σ 1) (mersenne (k + 1)) * (σ 1) (2 ^ k) → σ は乗法的関数
   rw [ArithmeticFunction.isMultiplicative_sigma.map_mul_of_coprime ((Odd.coprime_two_right (by simp)).pow_right _)]
-   -- (σ 1) (2 ^ k) = mersenne (k + 1)
+  -- (σ 1) (2 ^ k) = mersenne (k + 1)
   rw [sigma_two_pow_eq_mersenne_succ]
   -- ∑ d ∈ Prime.(mersenne (k + 1)).divisors, d * mersenne (k + 1) = 2 ^ (k + 1) * mersenne (k + 1)
   · rw [sigma_one_apply]
@@ -144,11 +143,11 @@ theorem even_two_pow_mul_mersenne_of_prime (k : ℕ) (pr : (mersenne (k + 1)).Pr
 
 -- 任意の自然数nは、ある奇数mを使って、n = 2 ^ k * m と表せる
 lemma eq_two_pow_mul_odd {n : ℕ} (hpos : 0 < n) : ∃ k m : ℕ, n = 2 ^ k * m ∧ ¬Even m := by
-  -- FiniteMultiplicity 2 n ↔ 2 ≠ 1 ∧ 0 < n, 有限重複 → nの中に2は有限個しかない?
+  -- FiniteMultiplicity 2 n ↔ 2 ≠ 1 ∧ 0 < n, 有限重複 → nの中に2は有限個しかない
   have h := Nat.finiteMultiplicity_iff.mpr ⟨Nat.prime_two.ne_one, hpos⟩
   -- 2 ^ multiplicity 2 n ∣ n → n = 2 ^ multiplicity 2 n * m
   obtain ⟨m, hm⟩ := pow_multiplicity_dvd 2 n
-   -- k = 2 ^ multiplicity 2 n, m = m
+  -- k = 2 ^ multiplicity 2 n, m = m を代入
   use multiplicity 2 n, m
   -- left だけ示す
   use hm
@@ -162,10 +161,8 @@ lemma eq_two_pow_mul_odd {n : ℕ} (hpos : 0 < n) : ∃ k m : ℕ, n = 2 ^ k * m
   rcases hg with ⟨k, rfl⟩
   -- 2 ^ (multiplicity 2 n).succ ∣ n → 2 ^ (multiplicity 2 n).succ * k = n
   apply Dvd.intro k
-  -- 2 ^ (multiplicity 2 n).succ * k = 2 ^ multiplicity 2 n * 2 * k
-  rw [pow_succ]
-  -- _ = 2 ^ multiplicity 2 n * (2 * k)
-  rw [mul_assoc]
+  -- 2 ^ (multiplicity 2 n).succ * k = 2 ^ multiplicity 2 n * (2 * k)
+  rw [pow_succ, mul_assoc]
   -- _ = n
   rw [← hm]
 
