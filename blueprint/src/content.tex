@@ -5,3 +5,151 @@
 % If you want to split the blueprint content into several files then
 % the current file can be a simple sequence of \input. Otherwise It
 % can start with a \section or \chapter for instance.
+
+\begin{definition}[完全数]\label{perfect}\lean{Perfect_}\leanok~\
+
+自然数 \(n\) が完全数であるとは, \(n\) の真の約数（\(n\) 自身を除く正の約数）の和が \(n\) に等しいとき,すなわち
+\[
+\sum_{\substack{d \mid n\\ d < n}} d = n
+\]
+\;\;\;が成り立つことをいう.
+
+\end{definition}
+
+
+\begin{definition}[約数関数]\label{Arithmetic_Function}\lean{sigma_div}\leanok~\
+
+自然数 \(n\) について, \(n\) のすべての約数 \(d\) に対して \(d^k\) (\(k\) は自然数) を足し合わせた関数
+\[
+\sigma_k(n) := \sum_{d \mid n} d^k
+\]
+\;\;\;を \(k\) 次の約数関数という.特に, \(\sigma_1(n)\) は \(n\) の約数の総和を表す.
+
+\end{definition}
+
+\vspace{0.5\baselineskip}
+
+今回は \(k = 1\) のときのみ考え, \(\sigma_1(n) = \sigma(n)\) と表す.
+
+\begin{lemma}
+
+\(\sigma(n)\) は以下の性質をもつ.
+
+\vspace{0.5\baselineskip}
+
+(1) \(n = 1\) のときに限り, \(\sigma(n) = 1\).
+
+(2) \(n\) が完全数のときに限り, \(\sigma(n) = 2n\).
+% \label{perfect_iff_sum_divisors_eq_two_mul}
+% \lean{perfect_iff_sum_divisors_eq_two_mul}\leanok
+
+(3) \(n\) が素数のときに限り, \(\sigma(n) =  1 + n\).
+% \label{prime_iff_sum_divisors_eq_succ}
+% \lean[prime_iff_sum_divisors_eq_succ]\leanok
+
+(4) 乗法的関数である.すなわち, 互いに素な自然数 \(m, n\) に対して, \(\sigma(mn) = \sigma(m) \cdot \sigma(n)\) が成り立つ.
+% \label{isMultiplicative}
+% \lean{isMultiplicative_sigma}\leanok
+
+\end{lemma}
+
+\begin{proof}
+
+\end{proof}
+
+
+\begin{definition}[メルセンヌ数]\label{mersenne}\lean{mersenne_}\leanok~\
+
+自然数 \(k\) に対して, \(M_k := 2^k - 1\) をメルセンヌ数と呼ぶ. \(M_k\) が素数であるとき,メルセンヌ素数という.
+
+\end{definition}
+
+
+\begin{lemma}\label{sigma_two_pow_eq_mersenne_succ}\lean{sigma_two_pow_eq_mersenne_succ}\leanok
+
+\(\sigma(2^k) = M_{k+1}\)
+
+\end{lemma}
+
+\begin{proof}
+
+\end{proof}
+
+
+\begin{theorem}[Euclid I]\label{perfect_two_pow_mul_mersenne_of_prime}
+  \lean{perfect_two_pow_mul_mersenne_of_prime}\leanok~\
+
+\(M_{k+1} = 2^{k+1} - 1\) が素数ならば, \(2^k \cdot M_{k+1}\) は完全数.
+
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+
+\begin{lemma}\label{ne_zero_of_prime_mersenne}\lean{ne_zero_of_prime_mersenne}\leanok~\
+
+\(M_{k+1} = 2^{k+1} - 1\) が素数ならば, \(k \neq 0\).
+
+\end{lemma}
+
+\begin{proof}
+
+\end{proof}
+
+
+\begin{theorem}[Euclid I\hspace{-1.2pt}I]\label{even_two_pow_mul_mersenne_of_prime}
+\lean{even_two_pow_mul_mersenne_of_prime}\leanok~\
+
+\(M_{k+1} = 2^{k+1} - 1\) が素数ならば, \(2^k \cdot M_{k+1}\) は偶数.
+
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+
+\begin{lemma}\label{eq_two_pow_mul_odd}\lean{eq_two_pow_mul_odd}\leanok~\
+
+任意の自然数 \(n > 0\) は,自然数 \(k\) と奇数 \(m\) を用いて, \(n = 2^k \cdot m\) と一意に表せる.
+
+\end{lemma}
+
+\begin{proof}
+
+\end{proof}
+
+
+\begin{theorem}[Euler]\label{eq_two_pow_mul_prime_mersenne_of_even_perfect}
+\lean{eq_two_pow_mul_prime_mersenne_of_even_perfect}\leanok~\
+
+\(n\) が偶数かつ完全数であるならば,ある自然数 \(k\) が存在して,
+\[
+n = 2^k (2^{k+1} - 1)
+\quad \text{かつ} \quad
+2^{k+1} - 1 \text{ は素数}
+\]
+が成り立つ.
+
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+
+\begin{theorem}[Euclid-Euler]\label{even_and_perfect_iff}
+\lean{even_and_perfect_iff}\leanok~\
+
+\( n \) を自然数とする.
+メルセンヌ数 \( 2^n - 1 \) が素数であるとき, \( 2^{n-1}(2^n - 1) \) は完全数である.
+
+逆に,任意の偶数の完全数は \( 2^{n-1}(2^n - 1) \) の形で表され,このとき \( 2^n - 1 \) は\(メルセンヌ\)素数である.
+
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
