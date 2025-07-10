@@ -17,7 +17,7 @@
 \end{definition}
 
 
-\begin{definition}[約数関数]\label{Arithmetic_Function}\lean{sigma_div}\leanok~\
+\begin{definition}[約数関数]\label{sigma_div}\lean{sigma_div}\leanok~\
 
 自然数 \(n\) について, \(n\) のすべての約数 \(d\) に対して \(d^k\) (\(k\) は自然数) を足し合わせた関数
 \[
@@ -42,6 +42,9 @@
 \end{lemma}
 
 \begin{proof}
+\(n = 1\) のとき, \(n\) の約数は \{1\}のみ. \(\therefore ~\sigma(n) = 1\).
+
+逆に, \(\sigma(n) = 1\) のとき, \(n \neq 1\) とすると, \(\sigma(n) > 1\) となるため, \(n = 1\).
 
 \end{proof}
 
@@ -53,7 +56,13 @@
 \end{lemma}
 
 \begin{proof}
+\(s(n) = \sum_{\substack{d \mid n\\ d < n}} d = n\) とする.
+定義2より, \(n\) が完全数のとき, \(s(n) = n\).
 
+\(\sigma(n) = s(n) + n\) であるから, \(\sigma(n) = 2n\).
+
+逆に, \(\sigma(n) = s(n) + n = 2n\) より, \(s(n) = n\).
+よって, \(n\) は完全数.
 \end{proof}
 
 \begin{lemma}\label{prime_iff_sum_divisors_eq_succ}
@@ -64,7 +73,10 @@
 \end{lemma}
 
 \begin{proof}
+\(n\) が素数のとき, \(n\) の約数は \{1, n\} より, \(\sigma(n) = 1 + n\).
 
+逆に, \(\sigma(n) = s(n) + n = 1 + n\) より, \(s(n) = 1\).
+このとき, \(n\) は素数.
 \end{proof}
 
 \begin{lemma}\label{isMultiplicative}
