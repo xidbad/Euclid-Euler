@@ -8,7 +8,7 @@
 
 \begin{definition}[完全数]\label{perfect}\lean{Perfect_}\leanok~\
 
-自然数 \(n\) が完全数であるとは, \(n\) の真の約数（\(n\) 自身を除く正の約数）の和が \(n\) に等しいとき,すなわち
+自然数 \(n\) が完全数であるとは, \(n\) の真の約数（\(n\) 自身を除く正の約数）の総和が \(n\) に等しいとき,すなわち
 \[
 \sum_{\substack{d \mid n\\ d < n}} d = n
 \]
@@ -31,30 +31,81 @@
 
 今回は \(k = 1\) のときのみ考え, \(\sigma_1(n) = \sigma(n)\) と表す.
 
-\begin{lemma}
+\vspace{0.5\baselineskip}
 
 \(\sigma(n)\) は以下の性質をもつ.
 
-\vspace{0.5\baselineskip}
+\begin{lemma}
 
-(1) \(n = 1\) のときに限り, \(\sigma(n) = 1\).
-
-(2) \(n\) が完全数のときに限り, \(\sigma(n) = 2n\).
-% \label{perfect_iff_sum_divisors_eq_two_mul}
-% \lean{perfect_iff_sum_divisors_eq_two_mul}\leanok
-
-(3) \(n\) が素数のときに限り, \(\sigma(n) =  1 + n\).
-% \label{prime_iff_sum_divisors_eq_succ}
-% \lean[prime_iff_sum_divisors_eq_succ]\leanok
-
-(4) 乗法的関数である.すなわち, 互いに素な自然数 \(m, n\) に対して, \(\sigma(mn) = \sigma(m) \cdot \sigma(n)\) が成り立つ.
-% \label{isMultiplicative}
-% \lean{isMultiplicative_sigma}\leanok
+\(n = 1\) のときに限り, \(\sigma(n) = 1\).
 
 \end{lemma}
 
 \begin{proof}
 
+\end{proof}
+
+\begin{lemma}\label{perfect_iff_sum_divisors_eq_two_mul}
+\lean{perfect_iff_sum_divisors_eq_two_mul}\leanok
+
+\(n\) が完全数のときに限り, \(\sigma(n) = 2n\).
+
+\end{lemma}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{lemma}\label{prime_iff_sum_divisors_eq_succ}
+\lean{prime_iff_sum_divisors_eq_succ}\leanok
+
+\(n\) が素数のときに限り, \(\sigma(n) =  1 + n\).
+
+\end{lemma}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{lemma}\label{isMultiplicative}
+
+\lean{isMultiplicative_sigma}\leanok
+乗法的関数である.すなわち, 互いに素な自然数 \(m, n\) に対して,
+
+\(\sigma(mn) = \sigma(m) \cdot \sigma(n)\) が成り立つ.
+
+\end{lemma}
+
+\begin{proof}
+\(m, n\) を互いに素な自然数とする.素因数分解の一意性から,
+\[
+m = \prod_{i=1}^{r}p_i^{a_i}, n = \prod_{i=1}^{r'}p_{r+i}^{a_{r+i}}
+\]と一意に表せる.
+\(m, n\) は互いに素より,任意の異なる \(i,j\in\{1, 2, \cdots, r, r+1, \cdots, r'\}\) について \(p_i \neq p_j\).
+
+よって, \[mn = \prod_{i=1}^{r+r'}p_i^{a_i}\] が成り立つ.
+ここで \(\sigma(m), \sigma(n)\) は,
+\begin{align*}
+\sigma(m) &= \sigma(\prod_{i=1}^{r}p_i^{a_i})\\
+          &= (1 + p_1 + \cdots + p_1^{a_1}) \cdots (1 + p_r + \cdots + p_r^{a_r})\\
+          &= \prod_{i=1}^{r}\sum_{b=0}^{a_i}p_i^{b}
+\end{align*}
+
+\begin{align*}
+\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\sigma(n) &= \sigma(\prod_{i=1}^{r'}p_{r+i}^{a_{r+i}})\\
+          &= (1 + p_{r+1} + \cdots + p_{r+1}^{a_{r+1}}) \cdots (1 + p_{r+r'} + \cdots + p_{r+r'}^{a_{r+r'}})\\
+          &= \prod_{i=r+1}^{r+r'}\sum_{b=0}^{a_i}p_i^{b}
+\end{align*}
+となる.また \(\sigma(mn)\) は,
+\begin{align*}
+\sigma(mn) &= \sigma(\prod_{i=1}^{r+r'}p_i^{a_i})\\
+           &= (1 + p_1 + \cdots + p_1^{a_1}) \cdots (1 + p_r + \cdots + p_r^{a_r})
+              \cdot (1 + p_{r+1} + \cdots + p_{r+1}^{a_{r+1}}) \cdots (1 + p_{r+r'} + \cdots + p_{r+r'}^{a_{r+r'}})\\
+           &= (\prod_{i=1}^{r}\sum_{b=0}^{a_i}p_i^{b}) \cdot (\prod_{i=r+1}^{r+r'}\sum_{b=0}^{a_i}p_i^{b})\\
+           &= \sigma(m) \cdot \sigma(n)
+\end{align*}
+
+したがって, \(\sigma(mn)\) = \(\sigma(m)\sigma(n)\) が成り立つため, \(\sigma\) は乗法的関数である.
 \end{proof}
 
 
@@ -72,7 +123,12 @@
 \end{lemma}
 
 \begin{proof}
-
+\begin{align*}
+  \sigma_1(2^k) = M_{k+1} &\Leftrightarrow \sum_{d \mid 2^k} d = M_{k+1}\\
+                          &\Leftrightarrow \sum_{d \mid 2^k} d = 2^{k+1} - 1\\
+                          &\Leftrightarrow \sum_{d \mid (1+1)^k} d = (1+1)^{k+1} - 1\\
+                          &\Leftrightarrow \sum_{d \mid (1+1)^k} d = (\sum_{i=0}^{k}(1+1)^i) \cdot 1 + 1 - 1
+\end{align*}
 \end{proof}
 
 
@@ -84,18 +140,28 @@
 \end{theorem}
 
 \begin{proof}
-
+\begin{align*}
+2^kM_{k+1} : Perfect &\Leftrightarrow \sum_{d \mid 2^kM_{k+1}} d = 2(2^kM_{k+1}) \wedge 2^kM_{k+1} > 0\\
+                     &\Leftrightarrow \sum_{d \mid 2^kM_{k+1}} d = 2^{k+1}M_{k+1} \wedge 2^kM_{k+1} > 0\\
+                     &\Leftrightarrow \sigma_1(2^kM_{k+1}) = 2^{k+1}M_{k+1} \wedge 2^kM_{k+1} > 0\\
+                     &\Leftrightarrow \sigma_1(M_{k+1}) \cdot \sigma_1(2^k) = 2^{k+1}M_{k+1} \wedge 2^kM_{k+1} > 0~~~(\because~lemma2.1)\\
+                     &\Leftrightarrow \sigma_1(M_{k+1}) \cdot M_{k+1} = 2^{k+1}M_{k+1} \wedge 2^kM_{k+1} > 0~~~(\because~lemma2.2)\\
+                     &\Leftrightarrow \sum_{d \mid M_{k+1}} d \cdot M_{k+1} = 2^{k+1}M_{k+1} \wedge 2^kM_{k+1} > 0\\
+&\text{\(M_{k+1}\) は素数より, \(\sigma_1(M_{k+1}) = 1 + M_{k+1} = 2^{k+1}\).}
+\end{align*}
 \end{proof}
 
 
-\begin{lemma}\label{ne_zero_of_prime_mersenne}\lean{ne_zero_of_prime_mersenne}\leanok~\
+\begin{lemma}\label{ne_zero_of_prime_mersenne}\lean{ne_zero_of_prime_mersenne}\leanok
 
 \(M_{k+1} = 2^{k+1} - 1\) が素数ならば, \(k \neq 0\).
 
 \end{lemma}
 
 \begin{proof}
+背理法を用いる. \(k = 0\) と仮定する.
 
+\(M_{k+1} : Prime = M_{0+1} = 1\) となるが, \(1\) は素数でない.よって矛盾.
 \end{proof}
 
 
@@ -107,7 +173,9 @@
 \end{theorem}
 
 \begin{proof}
+\(2^kM_{k+1} : Even \Rightarrow \lnot k = 0 \vee M_{k+1} : Even\).
 
+補題10より, \(M_{k+1} : Prime \Rightarrow k \neq 0\). よって,示された.
 \end{proof}
 
 
@@ -118,7 +186,38 @@
 \end{lemma}
 
 \begin{proof}
+\(2 \neq 1\) かつ \(n > 0\) より, \(n\) の中に \(2\) は有限個 (\(= k\) 個) 存在する.
 
+\(m = \frac{n}{2^k}\) とすると, \(n = 2^km\) と表せる.
+
+今, \(\lnot 2^{k+1} \mid n\) より, \(m\) が奇数であることと対偶をとると,
+\(m\) が偶数 \(\Rightarrow\) \(2^{k+1} \mid n\) となる.
+
+\(m = 2a\) とすれば, \(n = 2^k \cdot 2a = 2^{k+1}a\) となり, \(2^{k+1} \mid n\) が成り立つ.
+\end{proof}
+
+\begin{lemma}\label{sum_properDivisors_dvd}
+\lean{sum_properDivisors_dvd}\leanok
+
+自然数 \(n\) について, \(n\) の真の約数の和が \(n\) を割り切るならば, その和は \(1\) または \(n\).すなわち,
+\[
+\sum_{\substack{d \mid n\\ d < n}} d \mid n \quad \Rightarrow \quad \sum_{\substack{d \mid n\\ d < n}} d = 1 \vee \sum_{\substack{d \mid n\\ d < n}} d = n
+\]
+
+\end{lemma}
+
+\begin{proof}~
+\(\sum_{\substack{d \mid n\\ d < n}} d = s(n)\) と表す. \(s(n) \mid n\) と仮定する.
+
+\(s(n) = n\) のときは明らかより, \(s(n) \neq n\) とする. このとき, \(s(n) < n\).
+
+\(s(n) \mid n ~\text{かつ} ~ s(n) < n\) より, \(s(n)\) は \(n\) の真の約数.
+
+今, \(s(n)\) は \(n\) の真の約数の総和であり, \(s(n)\) 自身も \(n\) の真の約数ということは,
+\(n\) の真の約数は \(s(n)\) ただ1つである.
+しかし, \(2\) 以上のどんな自然数に対しても, \(1\) は真の約数であるため,
+真の約数が1つしか存在しないならば,それは1に限られる.
+したがって \(s(n) = 1\) が成り立つ.
 \end{proof}
 
 
@@ -127,16 +226,46 @@
 
 \(n\) が偶数かつ完全数であるならば,ある自然数 \(k\) が存在して,
 \[
-n = 2^k (2^{k+1} - 1)
-\quad \text{かつ} \quad
-2^{k+1} - 1 \text{ は素数}
+n = 2^k (2^{k+1} - 1) \quad \text{かつ} \quad 2^{k+1} - 1 \text{ は素数}
 \]
 が成り立つ.
 
 \end{theorem}
 
 \begin{proof}
+補題12より, \(n = 2^km\) と表せる. \(m\) は奇数より, \(2^k\) と互いに素.
+よって,
+\begin{align*}
+  \sigma(n) &= \sigma(2^km)\\
+            &= \sigma(2^k) \cdot \sigma(m)\\
+            &= M_{k+1} \cdot \sigma(m)~~~(\because~lemma2.2)\\
+            &= 2^{k+1}m~~~~~~~~~~(\because~n : Perfect)
+\end{align*}
+\(M_{k+1}\) と \(2^{k+1}\) は互いに素より,ある奇数 \(j\) を用いて, \(m = M_{k+1}j\) と表せる.
 
+\(M_{k+1} \sigma(m) = 2^{k+1} M_{k+1}j\) より, \(\sigma(M_{k+1}j) = 2^{k+1}j\) が成り立つ. (\(\because~M_{k+1} \neq 0\))
+\begin{align*}
+  \sigma(M_{k+1}j) = 2^{k+1}j &\Leftrightarrow \sum_{d \mid M_{k+1}j} d = 2^{k+1}j\\
+                              &\Leftrightarrow \sum_{\substack{d \mid M_{k+1}j\\ d < M_{k+1}j}} d + M_{k+1}j = 2^{k+1}j\\
+                              &\Leftrightarrow \sum_{\substack{d \mid M_{k+1}j\\ d < M_{k+1}j}} d + M_{k+1}j = (M_{k+1}+1)j\\
+                              &\Leftrightarrow \sum_{\substack{d \mid M_{k+1}j\\ d < M_{k+1}j}} d + M_{k+1}j = M_{k+1}j + j
+\end{align*}
+よって, \[\sum_{\substack{d \mid M_{k+1}j\\ d < M_{k+1}j}} d = j\] が成り立つ.
+
+補題13より, \(\sum_{\substack{d \mid M_{k+1}j\\ d < M_{k+1}j}} d = j \mid M_{k+1}j\) となるとき,
+\(\sum_{\substack{d \mid M_{k+1}j\\ d < M_{k+1}j}} d = 1~\vee~M_{k+1}j\).
+
+\(j = 1\) のとき,
+\[
+  \sum_{\substack{d \mid M_{k+1}\\ d < M_{k+1}}} d = 1 \Leftrightarrow M_{k+1} : Prime
+\]となり, \(M_{k+1} : Prime ~\text{かつ} ~n = 2^kM_{k+1}\) より示された.
+
+\(j = M_{k+1}j\) のとき,
+\begin{align*}
+  j = M_{k+1}j &\Leftrightarrow M_{k+1} = 1\\
+               &\Leftrightarrow k = 0\\
+               &\text{このとき, \(n\) は奇数となるため,不適.}
+\end{align*}
 \end{proof}
 
 
@@ -151,5 +280,9 @@ n = 2^k (2^{k+1} - 1)
 \end{theorem}
 
 \begin{proof}
+定理2.1と定理2.2より, \(M_{k+1}\) が素数ならば, \(2^k \cdot M_{k+1}\) は偶数の完全数.
 
+定理2.3より, \(N\) が偶数かつ完全数であるならば, ある自然数 \(n\) が存在して,
+
+\(N = 2^n(2^{n+1} - 1) \quad \text{かつ} \quad 2^{n+1} - 1 \text{は素数}\).
 \end{proof}

@@ -2,10 +2,10 @@ import Mathlib.NumberTheory.ArithmeticFunction
 import Mathlib.NumberTheory.LucasLehmer
 import Mathlib.Tactic.NormNum.Prime
 
-
 open Nat
 
 open ArithmeticFunction Finset
+
 
 -- 完全数の定義
 def Perfect_ (n : ℕ) : Prop :=
@@ -255,7 +255,7 @@ theorem eq_two_pow_mul_prime_mersenne_of_even_perfect {n : ℕ} (ev : Even n) (p
   -- jcon : j = mersenne (k + 1) * j
     have jcon := Eq.trans hj.symm h_1
   -- jcon : 1 * j = mersenne (k + 1) * j
-    nth_rewrite 1 [← one_mul j] at jcon
+    nth_rw 1 [← one_mul j] at jcon
   -- jcon2 : j ≠ 0 → 1 = mersenne (k + 1)
     have jcon2 := mul_right_cancel₀ ?_ jcon
   -- 爆発律 (仮定の矛盾を示す)
