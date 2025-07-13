@@ -27,7 +27,8 @@ lemma sigma_one_apply_ (n : ℕ) : σ 1 n = ∑ d ∈ divisors n, d := by simp [
 
 
 -- n = 1 ↔ ∑ d ∈ divisors n, d = 1
-lemma sigma_one (n : ℕ) : n = 1 ↔ ∑ d ∈ divisors n, d = 1 := by
+lemma one_iff_sum_divisors_eq_one (n : ℕ) :
+    n = 1 ↔ ∑ d ∈ divisors n, d = 1 := by
   constructor <;> intro h        -- → (h : n = 1) ∧ ← (h : ∑ d ∈ divisors n, d = 1)
   · rw [h]                       -- → ∑ d ∈ divisors 1, d = 1
     rfl
