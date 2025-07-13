@@ -27,20 +27,40 @@ lemma sigma_one_apply_ (n : ℕ) : σ 1 n = ∑ d ∈ divisors n, d := by simp [
 
 
 -- n = 1 ↔ ∑ d ∈ divisors n, d = 1
--- lemma one_iff_sigma_one (n : ℕ) :
---     n = 1 ↔ ∑ d ∈ divisors n, d = 1 := by
---   constructor <;> intro h        -- → (h : n = 1) ∧ ← (h : ∑ d ∈ divisors n, d = 1)
---   · rw [h]                       -- → ∑ d ∈ divisors 1, d = 1
---     rfl
---   · by_contra h'
---     sorry
-  -- · match n with
-  --   | 0 =>
-  --   exact h
-  --   | 1 =>
-  --   rfl
-  --   | succ n =>
+lemma sigma_one (n : ℕ) : n = 1 ↔ ∑ d ∈ divisors n, d = 1 := by
+  constructor <;> intro h        -- → (h : n = 1) ∧ ← (h : ∑ d ∈ divisors n, d = 1)
+  · rw [h]                       -- → ∑ d ∈ divisors 1, d = 1
+    rfl
+  · by_contra h'                 -- h' : ¬n = 1 → False
+    have h₁ : n ≠ 0 := by        -- h₁ : n ≠ 0
+      by_contra h''              -- h'' : n = 0 → False
+      rw [h''] at h              -- h :: ∑ d ∈ divisors 0, d = 1
+      simp [divisors_zero] at h  -- divisors 0 = ∅
+    have h₂ : 1 < n := one_lt_iff_ne_zero_and_ne_one.mpr ⟨h₁, h'⟩  -- n ≠ 0 ∧ n ≠ 1 → 1 < n
+    have h₃ : 1 + n ≤ ∑ d ∈ divisors n, d := by
+      rw [sum_divisors_eq_sum_properDivisors_add_self]       -- 1 + n ≤ ∑ i ∈ n.properDivisors, i + n
+      rw [add_le_add_iff_right]                              -- _ → 1 ≤ ∑ i ∈ n.properDivisors, i
+      apply one_le_iff_ne_zero.mpr                           -- _ → ∑ i ∈ n.properDivisors, i ≠ 0
+      by_contra h₄                                           -- h₄ : ∑ i ∈ n.properDivisors, i ≠ 0 → False
+      apply h'                                               -- False → n = 1
+      rw [sum_divisors_eq_sum_properDivisors_add_self] at h  -- ∑ i ∈ n.properDivisors, i + n = 1
+      rw [h₄, zero_add] at h                                 -- _ → 0 + n = n = 1
+      exact h
+    rw [h] at h₃                             -- h₅ : 1 + n ≤ 1
+    nth_rw 2 [← add_zero 1] at h₃            -- _ = 1 + 0
+    rw [add_le_add_iff_left] at h₃           -- h₅ : n ≤ 0
+    have h₅ : 1 < 0 := lt_of_lt_of_le h₂ h₃  -- h₆ : 1 < 0
+    absurd h₅                                -- False → ¬1 < 0
+    exact not_lt_zero 1                      -- ¬1 < 0
 
+
+-- ∑ divisors n = (∑ properDivisors n) + n
+lemma sum_divisors_eq_sum_properDivisors_add_self_ (n : ℕ):
+    ∑ i ∈ divisors n, i = (∑ i ∈ properDivisors n, i) + n := by
+  rcases Decidable.eq_or_ne n 0 with (rfl | hn)  -- n = 0 ∨ n ≠ 0 で場合分け
+  · simp
+  · rw [← cons_self_properDivisors hn]           -- n ≠ 0 → {n} ∪ n.properDivisors = n.divisors
+    rw [Finset.sum_cons, add_comm]               -- ∑ i ∈ {n} ∪ n.properDivisors, i = n + ∑ i ∈ n.properDivisors, i
 
 
 -- n : 完全数 ↔ σ(n) = 2n
@@ -52,30 +72,45 @@ lemma perfect_iff_sum_divisors_eq_two_mul (n : ℕ) (h : 0 < n) :
   · apply add_right_cancel h  -- ←, a + b = c + b → a = c
 
 
--- ∑ divisors n = (∑ properDivisors n) + n
-lemma sum_divisors_eq_sum_properDivisors_add_self (n : ℕ):
-    ∑ i ∈ divisors n, i = (∑ i ∈ properDivisors n, i) + n := by
-  rcases Decidable.eq_or_ne n 0 with (rfl | hn)
-  · simp
-  · rw [← cons_self_properDivisors hn, Finset.sum_cons, add_comm]
-
-
--- p : 素数 → ∑ d ∈ divisors p, d = 1 + p
-lemma sigma_one_apply_prime_one {p : ℕ} (hp : p.Prime) :
-    ∑ d ∈ divisors p, d = 1 + p := by
-  rw [sum_divisors_eq_sum_properDivisors_add_self p]
-  rw [sum_properDivisors_eq_one_iff_prime.mpr hp]
-
-
 -- n : 素数 ↔ ∑ d ∈ divisors n, d = 1 + n
 lemma prime_iff_sum_divisors_eq_succ (n : ℕ) :
     n.Prime ↔ ∑ i ∈ divisors n, i = 1 + n := by
-  constructor <;> intro h'                                    -- → (h' : n.Prime) ∧ ← (h' : ∑ i ∈ n.divisors, i = 1 + n)
-  · rw [sigma_one_apply_prime_one h']                         -- (p : Prime) → ∑ d ∈ p.divisors, d = 1 + p
-  · rw [sum_divisors_eq_sum_properDivisors_add_self n] at h'  -- ∑ i ∈ n.divisors, i = ∑ i ∈ n.properDivisors, i + n
-    apply add_right_cancel at h'                              -- a + b = c + b → a = c
-    rw [sum_properDivisors_eq_one_iff_prime] at h'            -- ∑ i ∈ n.properDivisors, i = 1 ↔ Nat.Prime n
+  constructor <;> intro h'                                     -- → (h' : n.Prime) ∧ ← (h' : ∑ i ∈ n.divisors, i = 1 + n)
+  · rw [sum_divisors_eq_sum_properDivisors_add_self_ n]        -- ∑ i ∈ n.divisors, i = ∑ i ∈ n.properDivisors, i + n
+    rw [sum_properDivisors_eq_one_iff_prime.mpr h']            -- n.Prime → ∑ i ∈ n.properDivisors, i = 1
+  · rw [sum_divisors_eq_sum_properDivisors_add_self_ n] at h'  -- ∑ i ∈ n.divisors, i = ∑ i ∈ n.properDivisors, i + n
+    apply add_right_cancel at h'                               -- a + b = c + b → a = c
+    rw [sum_properDivisors_eq_one_iff_prime] at h'             -- ∑ i ∈ n.properDivisors, i = 1 ↔ Nat.Prime n
     exact h'
+
+
+-- ζ(0) = 0, ζ(x) = 1 (x ≠ 0)
+def zeta : ArithmeticFunction ℕ :=
+  ⟨fun x => ite (x = 0) 0 1, rfl⟩
+
+
+-- ArithmeticFunction同士の掛け算はディリクレ積で定義
+-- (ζ * f)(x) = ∑ d ∈ divisors x, ζ(d) * f(x/d)
+theorem zeta_mul_apply_ {f : ArithmeticFunction ℕ} {x : ℕ} :
+    (ζ * f) x = ∑ i ∈ divisors x, f i := by
+  rw [← natCoe_nat ζ, coe_zeta_mul_apply]
+
+
+-- pow k n = n ^ k, pow 0 0 = 0
+def pow_ (k : ℕ) : ArithmeticFunction ℕ :=
+  id.ppow k
+
+
+-- (ζ * pow k) = ∑ d ∈ divisors x, d^k
+theorem zeta_mul_pow_eq_sigma_ {k : ℕ} : ζ * pow k = σ k := by
+  ext x                                   -- xを導入
+  rw [sigma, zeta_mul_apply]              -- sigmaの定義展開
+  apply sum_congr rfl                     -- s₁.sum f = s₂.sum g → ∀ x ∈ s₂, f(x) = g(x)
+  intro x' hx                             -- x'を導入
+  rw [pow_apply]                          -- powの展開
+  rw [if_neg (not_and_of_not_right _ _)]  -- (if c then t else e) = e → ¬c = ¬(k = 0 ∧ x' = 0)を示す → ¬x' = 0
+  contrapose! hx                          -- 対偶
+  simp [hx]                               -- 0は約数でない
 
 
 -- 乗法的関数であること
@@ -85,8 +120,7 @@ lemma isMultiplicative_sigma {k : ℕ} : IsMultiplicative (σ k) := by
 
 
 -- メルセンヌ数の定義
-def mersenne_ (p : ℕ) : ℕ :=
-  2 ^ p - 1
+def mersenne_ (p : ℕ) : ℕ := 2 ^ p - 1
 
 
 -- 1 から 2 ^ k までの和 = 2 ^ (k + 1) - 1 = mersenne (k + 1)
