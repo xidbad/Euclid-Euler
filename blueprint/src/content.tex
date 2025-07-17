@@ -78,9 +78,7 @@
 このとき, \(n\) は素数.
 \end{proof}
 
-\begin{lemma}\label{isMultiplicative}
-
-\lean{isMultiplicative_sigma}\leanok
+\begin{lemma}\label{isMultiplicative}\lean{isMultiplicative_sigma}\leanok
 乗法的関数である.すなわち, 互いに素な自然数 \(m, n\) に対して,
 
 \(\sigma(mn) = \sigma(m) \cdot \sigma(n)\) が成り立つ.
@@ -145,7 +143,7 @@ m = \prod_{i=1}^{r}p_i^{a_i}, n = \prod_{i=1}^{r'}p_{r+i}^{a_{r+i}}
 
 \begin{theorem}[Euclid I]\label{perfect_two_pow_mul_mersenne_of_prime}
 \lean{perfect_two_pow_mul_mersenne_of_prime}\leanok
-\uses{sigma_two_pow_eq_mersenne_succ, Mersenne, prime_iff_sum_divisors_eq_succ}~\
+\uses{sigma_two_pow_eq_mersenne_succ, Mersenne, prime_iff_sum_divisors_eq_succ, isMultiplicative}~\
 
 \(M_{k+1} = 2^{k+1} - 1\) が素数ならば, \(2^k \cdot M_{k+1}\) は完全数.
 
@@ -233,8 +231,8 @@ m = \prod_{i=1}^{r}p_i^{a_i}, n = \prod_{i=1}^{r'}p_{r+i}^{a_{r+i}}
 
 
 \begin{theorem}[Euler]\label{eq_two_pow_mul_prime_mersenne_of_even_perfect}
-\lean{eq_two_pow_mul_prime_mersenne_of_even_perfect}\leanok\uses{eq_two_pow_mul_odd,
-sum_properDivisors_dvd, perfect, sigma_two_pow_eq_mersenne_succ}~\
+\lean{eq_two_pow_mul_prime_mersenne_of_even_perfect}\leanok\uses{Mersenne, eq_two_pow_mul_odd,
+sum_properDivisors_dvd, perfect_iff_sum_divisors_eq_two_mul, sigma_two_pow_eq_mersenne_succ, isMultiplicative}~\
 
 \(n\) が偶数かつ完全数であるならば,ある自然数 \(k\) が存在して,
 \[
