@@ -145,7 +145,7 @@ m = \prod_{i=1}^{r}p_i^{a_i}, n = \prod_{i=1}^{r'}p_{r+i}^{a_{r+i}}
 
 \begin{theorem}[Euclid I]\label{perfect_two_pow_mul_mersenne_of_prime}
 \lean{perfect_two_pow_mul_mersenne_of_prime}\leanok
-\uses{sigma_two_pow_eq_mersenne_succ}\uses{Mersenne}\uses{prime_iff_sum_divisors_eq_succ}~\
+\uses{sigma_two_pow_eq_mersenne_succ, Mersenne, prime_iff_sum_divisors_eq_succ}~\
 
 \(M_{k+1} = 2^{k+1} - 1\) が素数ならば, \(2^k \cdot M_{k+1}\) は完全数.
 
@@ -178,7 +178,7 @@ m = \prod_{i=1}^{r}p_i^{a_i}, n = \prod_{i=1}^{r'}p_{r+i}^{a_{r+i}}
 
 
 \begin{theorem}[Euclid I\hspace{-1.2pt}I]\label{even_two_pow_mul_mersenne_of_prime}
-\lean{even_two_pow_mul_mersenne_of_prime}\leanok\uses{ne_zero_of_prime_mersenne}\uses{Mersenne}~\
+\lean{even_two_pow_mul_mersenne_of_prime}\leanok\uses{ne_zero_of_prime_mersenne, Mersenne}~\
 
 \(M_{k+1} = 2^{k+1} - 1\) が素数ならば, \(2^k \cdot M_{k+1}\) は偶数.
 
@@ -233,8 +233,8 @@ m = \prod_{i=1}^{r}p_i^{a_i}, n = \prod_{i=1}^{r'}p_{r+i}^{a_{r+i}}
 
 
 \begin{theorem}[Euler]\label{eq_two_pow_mul_prime_mersenne_of_even_perfect}
-\lean{eq_two_pow_mul_prime_mersenne_of_even_perfect}\leanok\uses{eq_two_pow_mul_odd}
-\uses{sum_properDivisors_dvd}\uses{perfect}\uses{sigma_two_pow_eq_mersenne_succ}~\
+\lean{eq_two_pow_mul_prime_mersenne_of_even_perfect}\leanok\uses{eq_two_pow_mul_odd,
+sum_properDivisors_dvd, perfect, sigma_two_pow_eq_mersenne_succ}~\
 
 \(n\) が偶数かつ完全数であるならば,ある自然数 \(k\) が存在して,
 \[
@@ -282,8 +282,8 @@ n = 2^k (2^{k+1} - 1) \quad \text{かつ} \quad 2^{k+1} - 1 \text{ は素数}
 
 
 \begin{theorem}[Euclid-Euler]\label{even_and_perfect_iff}
-\lean{even_and_perfect_iff}\leanok\uses{eq_two_pow_mul_prime_mersenne_of_even_perfect}
-\uses{even_two_pow_mul_mersenne_of_prime}\uses{perfect_two_pow_mul_mersenne_of_prime}~\
+\lean{even_and_perfect_iff}\leanok\uses{eq_two_pow_mul_prime_mersenne_of_even_perfect,
+even_two_pow_mul_mersenne_of_prime, perfect_two_pow_mul_mersenne_of_prime}~\
 
 \( n \) を自然数とする.
 メルセンヌ数 \( 2^n - 1 \) が素数であるとき, \( 2^{n-1}(2^n - 1) \) は完全数である.
