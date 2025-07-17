@@ -34,18 +34,18 @@ lemma one_iff_sum_divisors_eq_one (n : ℕ) : n = 1 ↔ ∑ d ∈ divisors n, d 
   · by_contra h'                                                  -- h' : ¬n = 1 → False
     have h₁ : n ≠ 0 := by                                         -- h₁ : n ≠ 0
       by_contra h''                                               -- h'' : n = 0 → False
-      rw [h''] at h                                               -- h :: ∑ d ∈ divisors 0, d = 1
+      rw [h''] at h                                               -- h : ∑ d ∈ divisors 0, d = 1
       simp [divisors_zero] at h                                   -- divisors 0 = ∅
     have h₂ : 1 < n := one_lt_iff_ne_zero_and_ne_one.mpr ⟨h₁, h'⟩  -- n ≠ 0 ∧ n ≠ 1 → 1 < n
     have h₃ : 1 + n ≤ ∑ d ∈ divisors n, d := by
       rw [sum_divisors_eq_sum_properDivisors_add_self]            -- 1 + n ≤ ∑ i ∈ n.properDivisors, i + n
       rw [add_le_add_iff_right]                                   -- _ → 1 ≤ ∑ i ∈ n.properDivisors, i
       apply one_le_iff_ne_zero.mpr                                -- _ → ∑ i ∈ n.properDivisors, i ≠ 0
-      by_contra h₄                                                -- h₄ : ∑ i ∈ n.properDivisors, i ≠ 0 → False
+      by_contra h₄                                                -- h₄ : ∑ i ∈ n.properDivisors, i = 0 → False
       apply h'                                                    -- False → n = 1
       rw [sum_divisors_eq_sum_properDivisors_add_self] at h       -- ∑ i ∈ n.properDivisors, i + n = 1
-      rw [h₄, zero_add] at h                                      -- _ → 0 + n = n = 1
-      exact h
+      rw [h₄, zero_add] at h                                      -- _ → 0 + n = 1
+      exact h                                                     -- _ → n = 1
     rw [h] at h₃                                                  -- h₃ : 1 + n ≤ 1
     nth_rw 2 [← add_zero 1] at h₃                                 -- _ = 1 + 0
     rw [add_le_add_iff_left] at h₃                                -- h₃ : n ≤ 0
