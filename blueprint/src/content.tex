@@ -23,11 +23,9 @@
 \[
 \sigma_k(n) := \sum_{d \mid n} d^k
 \]
-\;\;\;を \(k\) 次の約数関数という.% 特に, \(\sigma_1(n)\) は \(n\) の約数の総和を表す.
+\;\;\;を \(k\) 次の約数関数という.
 
 \end{definition}
-
-% \vspace{0.5\baselineskip}
 
 
 \begin{lemma}\label{sigma_one_apply}\lean{sigma_one_apply_}\leanok\uses{sigma_div}
@@ -42,11 +40,10 @@
 
 
 今回は \(k = 1\) のときのみ考え, \(\sigma_1(n) = \sigma(n)\) と表す.
-
 \(\sigma(n)\) は以下の性質をもつ.
 
 \begin{lemma}\label{one_iff_sum_divisors_eq_one}\lean{one_iff_sum_divisors_eq_one}
-  \leanok\uses{sigma_one_apply_}
+  \leanok\uses{sigma_one_apply}
 
 \(n = 1\) のときに限り, \(\sigma(n) = 1\).
 
@@ -60,7 +57,7 @@
 \end{proof}
 
 \begin{lemma}\label{perfect_iff_sum_divisors_eq_two_mul}
-\lean{perfect_iff_sum_divisors_eq_two_mul}\leanok\uses{perfect, sigma_one_apply_}
+\lean{perfect_iff_sum_divisors_eq_two_mul}\leanok\uses{perfect, sigma_one_apply}
 
 \(n\) が完全数のときに限り, \(\sigma(n) = 2n\).
 
@@ -77,7 +74,7 @@
 \end{proof}
 
 \begin{lemma}\label{prime_iff_sum_divisors_eq_succ}\lean{prime_iff_sum_divisors_eq_succ}
-\leanok\uses{sigma_one_apply_}
+\leanok\uses{sigma_one_apply}
 
 \(n\) が素数のときに限り, \(\sigma(n) =  1 + n\).
 
@@ -90,7 +87,7 @@
 このとき, \(n\) は素数.
 \end{proof}
 
-\begin{lemma}\label{isMultiplicative}\lean{isMultiplicative_sigma}\leanok\uses{sigma_one_apply_}
+\begin{lemma}\label{isMultiplicative}\lean{isMultiplicative_sigma}\leanok\uses{sigma_one_apply}
 乗法的関数である.すなわち, 互いに素な自然数 \(m, n\) に対して,
 
 \(\sigma(mn) = \sigma(m) \cdot \sigma(n)\) が成り立つ.
