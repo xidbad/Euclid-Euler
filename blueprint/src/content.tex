@@ -23,19 +23,28 @@
 \[
 \sigma_k(n) := \sum_{d \mid n} d^k
 \]
-\;\;\;を \(k\) 次の約数関数という.特に, \(\sigma_1(n)\) は \(n\) の約数の総和を表す.
+\;\;\;を \(k\) 次の約数関数という.% 特に, \(\sigma_1(n)\) は \(n\) の約数の総和を表す.
 
 \end{definition}
 
-\vspace{0.5\baselineskip}
+% \vspace{0.5\baselineskip}
 
-今回は \(k = 1\) のときのみ考え, \(\sigma_1(n) = \sigma(n)\) と表す.
+
+\begin{lemma}\label{sigma_one_apply}\lean{sigma_one_apply_}\leanok\uses{sigma_div}
+
+\(k = 1\) のとき, \(\sigma_k(n)\) は \(n\) の約数の総和を表す.
+
+\end{lemma}
+
+
+% 今回は \(k = 1\) のときのみ考え, \(\sigma_1(n) = \sigma(n)\) と表す.
 
 \vspace{0.5\baselineskip}
 
 \(\sigma(n)\) は以下の性質をもつ.
 
-\begin{lemma}\label{one_iff_sum_divisors_eq_one}\lean{one_iff_sum_divisors_eq_one}\leanok
+\begin{lemma}\label{one_iff_sum_divisors_eq_one}\lean{one_iff_sum_divisors_eq_one}
+  \leanok\uses{sigma_one_apply_}
 
 \(n = 1\) のときに限り, \(\sigma(n) = 1\).
 
@@ -49,7 +58,7 @@
 \end{proof}
 
 \begin{lemma}\label{perfect_iff_sum_divisors_eq_two_mul}
-\lean{perfect_iff_sum_divisors_eq_two_mul}\leanok\uses{perfect}
+\lean{perfect_iff_sum_divisors_eq_two_mul}\leanok\uses{perfect, sigma_one_apply_}
 
 \(n\) が完全数のときに限り, \(\sigma(n) = 2n\).
 
@@ -65,7 +74,8 @@
 よって, \(n\) は完全数.
 \end{proof}
 
-\begin{lemma}\label{prime_iff_sum_divisors_eq_succ}\lean{prime_iff_sum_divisors_eq_succ}\leanok
+\begin{lemma}\label{prime_iff_sum_divisors_eq_succ}\lean{prime_iff_sum_divisors_eq_succ}
+\leanok\uses{sigma_one_apply_}
 
 \(n\) が素数のときに限り, \(\sigma(n) =  1 + n\).
 
@@ -78,7 +88,7 @@
 このとき, \(n\) は素数.
 \end{proof}
 
-\begin{lemma}\label{isMultiplicative}\lean{isMultiplicative_sigma}\leanok
+\begin{lemma}\label{isMultiplicative}\lean{isMultiplicative_sigma}\leanok\uses{sigma_one_apply_}
 乗法的関数である.すなわち, 互いに素な自然数 \(m, n\) に対して,
 
 \(\sigma(mn) = \sigma(m) \cdot \sigma(n)\) が成り立つ.
