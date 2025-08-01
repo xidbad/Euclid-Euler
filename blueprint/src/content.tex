@@ -12,7 +12,7 @@
 \[
 \sum_{\substack{d \mid n\\ d < n}} d = n
 \]
-\;\;\;が成り立つことをいう.
+が成り立つことをいう.
 
 \end{definition}
 
@@ -23,15 +23,13 @@
 \[
 \sigma_k(n) := \sum_{d \mid n} d^k
 \]
-\;\;\;を \(k\) 次の約数関数という.
+を \(k\) 次の約数関数という.
 
 \end{definition}
 
 
 \begin{lemma}\label{sigma_one_apply}\lean{sigma_one_apply_}\leanok\uses{sigma_div}
-
 \(k = 1\) のとき, \(\sigma_k(n)\) は \(n\) の約数の総和を表す.
-
 \end{lemma}
 
 \begin{proof}
@@ -42,25 +40,22 @@
 今回は \(k = 1\) のときのみ考え, \(\sigma_1(n) = \sigma(n)\) と表す.
 \(\sigma(n)\) は以下の性質をもつ.
 
+
 \begin{lemma}\label{one_iff_sum_divisors_eq_one}\lean{one_iff_sum_divisors_eq_one}
-  \leanok\uses{sigma_one_apply}
-
+\leanok\uses{sigma_one_apply}
 \(n = 1\) のときに限り, \(\sigma(n) = 1\).
-
 \end{lemma}
 
 \begin{proof}
 \(n = 1\) のとき, \(n\) の約数は \{1\}のみ. \(\therefore ~\sigma(n) = 1\).
 
 逆に, \(\sigma(n) = 1\) のとき, \(n \neq 1\) とすると, \(\sigma(n) > 1\) となるため, \(n = 1\).
-
 \end{proof}
+
 
 \begin{lemma}\label{perfect_iff_sum_divisors_eq_two_mul}
 \lean{perfect_iff_sum_divisors_eq_two_mul}\leanok\uses{perfect, sigma_one_apply}
-
 \(n\) が完全数のときに限り, \(\sigma(n) = 2n\).
-
 \end{lemma}
 
 \begin{proof}
@@ -75,9 +70,7 @@
 
 \begin{lemma}\label{prime_iff_sum_divisors_eq_succ}\lean{prime_iff_sum_divisors_eq_succ}
 \leanok\uses{sigma_one_apply}
-
 \(n\) が素数のときに限り, \(\sigma(n) =  1 + n\).
-
 \end{lemma}
 
 \begin{proof}
@@ -88,42 +81,52 @@
 \end{proof}
 
 \begin{lemma}\label{isMultiplicative}\lean{isMultiplicative_sigma}\leanok\uses{sigma_one_apply}
-乗法的関数である.すなわち, 互いに素な自然数 \(m, n\) に対して,
-
+\(\sigma(n)\) は乗法的関数である.すなわち, 互いに素な自然数 \(m, n\) に対して,
 \(\sigma(mn) = \sigma(m) \cdot \sigma(n)\) が成り立つ.
-
 \end{lemma}
 
 \begin{proof}
-\(m, n\) を互いに素な自然数とする.素因数分解の一意性から,
+まず,ゼータ関数とpow関数を定義する.これらは数論的関数(Arithmetic Function)と呼ばれる.
+数論的関数とは, 定義域が自然数の関数である. (Leanだと0は自然数に含まれるため, 0は0に飛ぶことにする)
 \[
-m = \prod_{i=1}^{r}p_i^{a_i}, n = \prod_{i=1}^{r'}p_{r+i}^{a_{r+i}}
-\]と一意に表せる.
-\(m, n\) は互いに素より,任意の異なる \(i,j\in\{1, 2, \cdots, r, r+1, \cdots, r'\}\) について \(p_i \neq p_j\).
+\zeta(n) :=
+\begin{cases}
+  1 & (n \geqq 1)\\
+  0 & (n = 0)
+\end{cases}
+\]
+\[
+\mathrm{pow}_k(n) :=
+\begin{cases}
+  n^k & (n \geqq 1)\\
+  0 & (n = 0)
+\end{cases}
+\]
 
-よって, \[mn = \prod_{i=1}^{r+r'}p_i^{a_i}\] が成り立つ.
-ここで \(\sigma(m), \sigma(n)\) は,
+これら数論的関数同士の積は次のようなディリクレ積で定義される. \(f\) を数論的関数とすると,
 \begin{align*}
-\sigma(m) &= \sigma(\prod_{i=1}^{r}p_i^{a_i})\\
-          &= (1 + p_1 + \cdots + p_1^{a_1}) \cdots (1 + p_r + \cdots + p_r^{a_r})\\
-          &= \prod_{i=1}^{r}\sum_{b=0}^{a_i}p_i^{b}
+  (\zeta \ast f)(n) &:= \sum_{d \mid n} \zeta(d) \cdot f(\frac{n}{d})\\
+  &= \sum_{i \mid n} f(i)~~(\because~\zeta(d) = 1 (d \geqq 1) \quad \text{かつ} \quad \frac{n}{d} \text{は} n \text{の約数})
 \end{align*}
 
+ここで, \(f = \mathrm{pow}_k\) とすると,
 \begin{align*}
-\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\sigma(n) &= \sigma(\prod_{i=1}^{r'}p_{r+i}^{a_{r+i}})\\
-          &= (1 + p_{r+1} + \cdots + p_{r+1}^{a_{r+1}}) \cdots (1 + p_{r+r'} + \cdots + p_{r+r'}^{a_{r+r'}})\\
-          &= \prod_{i=r+1}^{r+r'}\sum_{b=0}^{a_i}p_i^{b}
-\end{align*}
-となる.また \(\sigma(mn)\) は,
-\begin{align*}
-\sigma(mn) &= \sigma(\prod_{i=1}^{r+r'}p_i^{a_i})\\
-           &= (1 + p_1 + \cdots + p_1^{a_1}) \cdots (1 + p_r + \cdots + p_r^{a_r})
-              \cdot (1 + p_{r+1} + \cdots + p_{r+1}^{a_{r+1}}) \cdots (1 + p_{r+r'} + \cdots + p_{r+r'}^{a_{r+r'}})\\
-           &= (\prod_{i=1}^{r}\sum_{b=0}^{a_i}p_i^{b}) \cdot (\prod_{i=r+1}^{r+r'}\sum_{b=0}^{a_i}p_i^{b})\\
-           &= \sigma(m) \cdot \sigma(n)
+  (\zeta \ast \mathrm{pow}_k)(n) &= \sum_{d \mid n} d ^ k\\
+                                 &= \sigma_k(n)
 \end{align*}
 
-したがって, \(\sigma(mn)\) = \(\sigma(m)\sigma(n)\) が成り立つため, \(\sigma\) は乗法的関数である.
+乗法的関数同士のディリクレ積もまた乗法的関数であることを示す.
+\(f, g\) を乗法的関数とする.互いに素な自然数 \(m, n\) に対して,
+\(mn\) の約数 \(d\) は \(d = d_1d_2, (d_1 \mid m, d_2 \mid n)\) と表せる.
+\begin{align*}
+  (f \ast g)(mn) &= \sum_{d \mid mn} f(d) \cdot g(\frac{mn}{d})\\
+                 &= \sum_{d_1d_2 \mid mn} f(d_1d_2) \cdot g(\frac{mn}{d_1d_2})\\
+                 &= \sum_{d_1 \mid m} \sum_{d_2 \mid n} f(d_1)f(d_2) \cdot g(\frac{m}{d_1})g(\frac{n}{d_2})~~(\because~ (d_1, d_2) \text{は互いに素})\\
+                 &= \sum_{d_1 \mid m} f(d_1) \cdot g(\frac{m}{d_1}) \cdot \sum_{d_2 \mid n} f(d_2) \cdot g(\frac{n}{d_2})\\
+                 &= (f \ast g)(m) \cdot (f \ast g)(n)
+\end{align*}
+\(\zeta\) 関数も \(\mathrm{pow}_k\) 関数も乗法的関数であり,それらの積もまた乗法的関数であるため,
+\(\sigma_k\) 関数も乗法的関数である.
 \end{proof}
 
 
@@ -137,7 +140,6 @@ m = \prod_{i=1}^{r}p_i^{a_i}, n = \prod_{i=1}^{r'}p_{r+i}^{a_{r+i}}
 \begin{lemma}\label{sigma_two_pow_eq_mersenne_succ}\lean{sigma_two_pow_eq_mersenne_succ}\leanok
 \uses{Mersenne}
 \(\sigma(2^k) = M_{k+1}\)
-
 \end{lemma}
 
 \begin{proof}
@@ -163,9 +165,8 @@ m = \prod_{i=1}^{r}p_i^{a_i}, n = \prod_{i=1}^{r'}p_{r+i}^{a_{r+i}}
 2^kM_{k+1} : Perfect &\Leftrightarrow \sum_{d \mid 2^kM_{k+1}} d = 2(2^kM_{k+1}) \wedge 2^kM_{k+1} > 0\\
                      &\Leftrightarrow \sum_{d \mid 2^kM_{k+1}} d = 2^{k+1}M_{k+1} \wedge 2^kM_{k+1} > 0\\
                      &\Leftrightarrow \sigma_1(2^kM_{k+1}) = 2^{k+1}M_{k+1} \wedge 2^kM_{k+1} > 0\\
-                     &\Leftrightarrow \sigma_1(M_{k+1}) \cdot \sigma_1(2^k) = 2^{k+1}M_{k+1} \wedge 2^kM_{k+1} > 0~~~(\because~lemma2.1)\\
+                     &\Leftrightarrow \sigma_1(M_{k+1}) \cdot \sigma_1(2^k) = 2^{k+1}M_{k+1} \wedge 2^kM_{k+1} > 0~~(\because~lemma2.1)\\
                      &\Leftrightarrow \sigma_1(M_{k+1}) \cdot M_{k+1} = 2^{k+1}M_{k+1} \wedge 2^kM_{k+1} > 0~~~(\because~lemma2.2)\\
-                     &\Leftrightarrow \sum_{d \mid M_{k+1}} d \cdot M_{k+1} = 2^{k+1}M_{k+1} \wedge 2^kM_{k+1} > 0\\
 &\text{\(M_{k+1}\) は素数より, \(\sigma_1(M_{k+1}) = 1 + M_{k+1} = 2^{k+1}\).}
 \end{align*}
 \end{proof}
@@ -174,7 +175,6 @@ m = \prod_{i=1}^{r}p_i^{a_i}, n = \prod_{i=1}^{r'}p_{r+i}^{a_{r+i}}
 \begin{lemma}\label{ne_zero_of_prime_mersenne}\lean{ne_zero_of_prime_mersenne}\leanok
 \uses{Mersenne}
 \(M_{k+1} = 2^{k+1} - 1\) が素数ならば, \(k \neq 0\).
-
 \end{lemma}
 
 \begin{proof}
@@ -201,7 +201,6 @@ m = \prod_{i=1}^{r}p_i^{a_i}, n = \prod_{i=1}^{r'}p_{r+i}^{a_{r+i}}
 \begin{lemma}\label{eq_two_pow_mul_odd}\lean{eq_two_pow_mul_odd}\leanok~\
 
 任意の自然数 \(n > 0\) は,自然数 \(k\) と奇数 \(m\) を用いて, \(n = 2^k \cdot m\) と一意に表せる.
-
 \end{lemma}
 
 \begin{proof}
