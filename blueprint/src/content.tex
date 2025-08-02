@@ -9,9 +9,7 @@
 \begin{definition}[完全数]\label{perfect}\lean{Perfect_}\leanok~\
 
 自然数 \(n\) が完全数であるとは, \(n\) の真の約数（\(n\) 自身を除く正の約数）の総和が \(n\) に等しいとき,すなわち
-\[
-\sum_{\substack{d \mid n\\ d < n}} d = n
-\]
+\[ \sum_{\substack{d \mid n\\ d < n}} d = n \]
 が成り立つことをいう.
 
 \end{definition}
@@ -20,9 +18,7 @@
 \begin{definition}[約数関数]\label{sigma_div}\lean{sigma_div}\leanok~\
 
 自然数 \(n\) について, \(n\) のすべての約数 \(d\) に対して \(d^k\) (\(k\) は自然数) を足し合わせた関数
-\[
-\sigma_k(n) := \sum_{d \mid n} d^k
-\]
+\[ \sigma_k(n) := \sum_{d \mid n} d^k \]
 を \(k\) 次の約数関数という.
 
 \end{definition}
@@ -88,25 +84,17 @@ Definition1より, \(n\) が完全数のとき, \(s(n) = n\).
 \begin{proof}
 まず,ゼータ関数とpow関数を次のように定義する.これらは数論的関数(Arithmetic Function)と呼ばれる.
 数論的関数とは, 定義域が自然数の関数である. (Leanだと0は自然数に含まれるため, 0は0に飛ぶことにする)
-\[
-\zeta(n) :=
-\begin{cases}
-  1 & (n \geqq 1)\\
-  0 & (n = 0)
-\end{cases}
-\]
-\[
-\mathrm{pow}_k(n) :=
-\begin{cases}
-  n^k & (n \geqq 1)\\
-  0 & (n = 0)
-\end{cases}
-\]
+\[\zeta(n) :=
+\begin{cases} 1 & (n \geqq 1)\\
+              0 & (n = 0)
+\end{cases}\]
+\[\mathrm{pow}_k(n) :=
+\begin{cases} n^k & (n \geqq 1)\\
+                0 & (n = 0)
+\end{cases}\]
 
-ここで \(f, g\) を数論的関数とすると,数論的関数同士のディリクレ積は次のように定義される.
-\[
-  (f \ast g)(n) := \sum_{d \mid n} f(d)g(\frac{n}{d})
-\]
+\(f, g\) を数論的関数とすると,数論的関数同士のディリクレ積は次のように定義される.
+\[(f \ast g)(n) := \sum_{d \mid n} f(d)g(\frac{n}{d})\]
 
 ここで, \(f = \zeta, ~g = \mathrm{pow}_k\) とすると,
 \begin{align*}
@@ -260,15 +248,15 @@ Lemma13より, \(n = 2^km\) と表せる. \(m\) は奇数より, \(2^k\) と互�
 よって,
 \begin{align*}
 \sigma(n) ~&=~ \sigma(2^km)\\
-            ~&=~ \sigma(2^k)\sigma(m)~~(\because~Lemma7)\\
-            ~&=~ M_{k+1}\sigma(m)~~(\because~Lemma9)
+          ~&=~ \sigma(2^k)\sigma(m)~~(\because~Lemma7)\\
+          ~&=~ M_{k+1}\sigma(m)~~(\because~Lemma9)
 \end{align*}
 
 また \(n\) は完全数より, Lemma5から \(\sigma(n) = 2^{k+1}m\). \(\therefore~ M_{k+1}\sigma(m) = 2^{k+1}m\).
 
 \(M_{k+1}\) と \(2^{k+1}\) は互いに素より,ある奇数 \(j\) を用いて, \(m = M_{k+1}j\) と表せる.
 
-\(M_{k+1} \sigma(m) = 2^{k+1} M_{k+1}j\) より, \(\sigma(M_{k+1}j) = 2^{k+1}j\) が成り立つ. (\(\because~M_{k+1} \neq 0\))
+\(M_{k+1} \sigma(m) = 2^{k+1} M_{k+1}j\) より, \(\sigma(M_{k+1}j) = 2^{k+1}j\) が成り立つ. %(\(\because~M_{k+1} \neq 0\))
 \begin{align*}
 \sigma(M_{k+1}j) = 2^{k+1}j ~&\Leftrightarrow~ \sum_{d \mid M_{k+1}j} d = 2^{k+1}j\\
                             ~&\Leftrightarrow~ \sum_{\substack{d \mid M_{k+1}j\\ d < M_{k+1}j}} d + M_{k+1}j = 2^{k+1}j\\
@@ -287,8 +275,8 @@ Lemma13より, \(n = 2^km\) と表せる. \(m\) は奇数より, \(2^k\) と互�
 
 \(j = M_{k+1}j\) のとき,
 \begin{align*}
-  j = M_{k+1}j ~&\Leftrightarrow~ M_{k+1} = 1\\
-               ~&\Leftrightarrow~ k = 0
+j = M_{k+1}j ~&\Leftrightarrow~ M_{k+1} = 1\\
+             ~&\Leftrightarrow~ k = 0
 \end{align*}
 このとき \(n = 2^km = m\) で, \(n\) が奇数となるため,不適.
 \end{proof}
