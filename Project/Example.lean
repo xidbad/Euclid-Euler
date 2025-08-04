@@ -119,6 +119,7 @@ lemma isMultiplicative_sigma {k : ℕ} : IsMultiplicative (σ k) := by
 
 
 -- メルセンヌ数の定義
+-- p = 0 のときは　0 を返す
 def Mersenne (p : ℕ) : ℕ := 2 ^ p - 1
 
 
