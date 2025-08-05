@@ -55,7 +55,7 @@
 \end{lemma}
 
 \begin{proof}
-\(s(n) = \sum_{\substack{d \mid n\\ d < n}} d = n\) とする.
+\(s(n) = \sum_{\substack{d \mid n\\ d < n}} d\) とする.
 Definition1より, \(n\) が完全数のとき, \(s(n) = n\).
 
 \(\sigma(n) = s(n) + n\) であるから, \(\sigma(n) = 2n\).
@@ -107,11 +107,12 @@ Definition1より, \(n\) が完全数のとき, \(s(n) = n\).
 乗法的関数同士のディリクレ積もまた乗法的関数であることを示す.
 \begin{proof}
 \(f, g\) を乗法的関数とする.互いに素な自然数 \(m, n\) に対して,
-\(mn\) の約数 \(d\) は \(d = d_1d_2 ~(d_1 \mid m, d_2 \mid n)\) と一意に表せる.
+\(mn\) の任意の約数 \(d\) は \(d = d_1d_2 ~(d_1 \mid m, d_2 \mid n)\) と一意に表せる.
 \begin{align*}
   (f \ast g)(mn) ~&=~ \sum_{d \mid mn} f(d)g(\frac{mn}{d})\\
                  ~&=~ \sum_{d_1d_2 \mid mn} f(d_1d_2)g(\frac{mn}{d_1d_2})\\
-                 ~&=~ \sum_{d_1 \mid m} \sum_{d_2 \mid n} f(d_1)f(d_2)g(\frac{m}{d_1})g(\frac{n}{d_2})~~(\because ~d_1, d_2 \text{は互いに素})\\
+                 ~&=~ \sum_{d_1 \mid m} \sum_{d_2 \mid n} f(d_1)f(d_2)g(\frac{m}{d_1})g(\frac{n}{d_2})~~
+                 (\because ~(d_1, d_2) \text{と} (\frac{m}{d_1}, \frac{n}{d_2}) \text{はそれぞれ互いに素})\\
                  ~&=~ \{\sum_{d_1 \mid m} f(d_1)g(\frac{m}{d_1})\} \cdot \{\sum_{d_2 \mid n} f(d_2)g(\frac{n}{d_2})\}\\
                  ~&=~ (f \ast g)(m) \cdot (f \ast g)(n)
 \end{align*}\end{proof}
@@ -154,9 +155,9 @@ Definition1より, \(n\) が完全数のとき, \(s(n) = n\).
 
 \begin{proof}
 \begin{align*}
-N = 2^kM_{k+1} : Perfect ~&\Leftrightarrow~ \sum_{d \mid 2^kM_{k+1}} d = 2(2^kM_{k+1}) ~\wedge~ N > 0\\
+N = 2^kM_{k+1} : Perfect ~&\Leftrightarrow~ \sum_{d \mid 2^kM_{k+1}} d = 2(2^kM_{k+1}) ~\wedge~ N > 0~~~~(\because~Lemma5)\\
                          ~&\Leftrightarrow~ \sum_{d \mid 2^kM_{k+1}} d = 2^{k+1}M_{k+1} ~\wedge~ N > 0\\
-                         ~&\Leftrightarrow~ \sigma(2^kM_{k+1}) = 2^{k+1}M_{k+1} ~\wedge~ N > 0\\
+                         ~&\Leftrightarrow~ \sigma(2^kM_{k+1}) = 2^{k+1}M_{k+1} ~\wedge~ N > 0~~~~~~(\because~Lemma3)\\
                          ~&\Leftrightarrow~ \sigma(M_{k+1})\sigma(2^k) = 2^{k+1}M_{k+1} ~\wedge~ N > 0~~(\because~Lemma7)\\
                          ~&\Leftrightarrow~ \sigma(M_{k+1})M_{k+1} = 2^{k+1}M_{k+1} ~\wedge~ N > 0~~(\because~Lemma9)\\
 \end{align*}
@@ -261,13 +262,13 @@ Lemma13より, \(N = 2^km\) と表せる. \(m\) は奇数より, \(2^k\) と互�
 
 また \(N\) は完全数より, Lemma5から \(\sigma(N) = 2^{k+1}m\). \(\therefore~ M_{k+1}\sigma(m) = 2^{k+1}m\).
 
-\(M_{k+1}\) と \(2^{k+1}\) は互いに素より,ある奇数 \(j\) を用いて, \(m = M_{k+1}j\) と表せる.
+\(M_{k+1}\) と \(2^{k+1}\) は互いに素より,ある自然数 \(j\) を用いて, \(m = M_{k+1}j\) と表せる.
 
 \(M_{k+1} \sigma(m) = 2^{k+1} M_{k+1}j\) より, \(\sigma(M_{k+1}j) = 2^{k+1}j\) が成り立つ. (\(\because~M_{k+1} \neq 0\))
 \begin{align*}
-\sigma(M_{k+1}j) = 2^{k+1}j ~&\Leftrightarrow~ \sum_{d \mid M_{k+1}j} d = 2^{k+1}j\\
+\sigma(M_{k+1}j) = 2^{k+1}j ~&\Leftrightarrow~ \sum_{d \mid M_{k+1}j} d = 2^{k+1}j~~(\because~Lemma3)\\
                             ~&\Leftrightarrow~ \sum_{\substack{d \mid M_{k+1}j, d < M_{k+1}j}} d + M_{k+1}j = 2^{k+1}j\\
-                            ~&\Leftrightarrow~ \sum_{\substack{d \mid M_{k+1}j, d < M_{k+1}j}} d + M_{k+1}j = (M_{k+1}+1)j\\
+                            ~&\Leftrightarrow~ \sum_{\substack{d \mid M_{k+1}j, d < M_{k+1}j}} d + M_{k+1}j = (M_{k+1}+1)j~(\because~Definition8)\\
                             ~&\Leftrightarrow~ \sum_{\substack{d \mid M_{k+1}j, d < M_{k+1}j}} d + M_{k+1}j = M_{k+1}j + j\\
                             ~&\Leftrightarrow~ \sum_{\substack{d \mid M_{k+1}j, d < M_{k+1}j}} d = j
 \end{align*}
