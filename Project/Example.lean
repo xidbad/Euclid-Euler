@@ -185,9 +185,9 @@ lemma eq_two_pow_mul_odd {n : ℕ} (hpos : 0 < n) : ∃ k m : ℕ, n = 2 ^ k * m
 theorem sum_properDivisors_dvd (n : ℕ) (h : (∑ x ∈ n.properDivisors, x) ∣ n) :
     ∑ x ∈ n.properDivisors, x = 1 ∨ ∑ x ∈ n.properDivisors, x = n := by
   rcases n with _ | n                                       -- n = 0 ∨ n = succ n で場合分け
-  · simp                                                    -- n = 0 のときはok
+  · simp                                                    -- n = 0 のときは, s(n) = 0 → 0 ∣ 0 でright
   · rcases n with _ | n                                     -- n = succ n のとき, n = 0 ∨ n = succ n で場合分け
-    · simp at h                                             -- n = 0 のときはok
+    · simp at h                                             -- n = 0 のとき,すなわち n = 1 のとき, s(n) = 0 → 0 ∣ 1 でそもそも仮定が成り立たない
     · rw [or_iff_not_imp_right]                             -- a ∨ b ↔ ¬b → a
       intro h'                                              -- h' : ¬∑ x ∈ (n + 1 + 1).properDivisors, x = n + 1 + 1
       have hlt : ∑ x ∈ n.succ.succ.properDivisors, x < n.succ.succ := lt_of_le_of_ne (Nat.le_of_dvd (Nat.succ_pos _) h) h'
