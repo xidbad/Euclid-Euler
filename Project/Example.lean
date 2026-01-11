@@ -1,4 +1,3 @@
-import Mathlib.NumberTheory.ArithmeticFunction
 import Mathlib.NumberTheory.LucasLehmer
 import Mathlib.Tactic.NormNum.Prime
 
